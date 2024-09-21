@@ -4,10 +4,6 @@ public class Menu {
     private static int pontos = 50;
     private static int i = 0;
 
-    public int getPontos() {
-        return pontos;
-    }
-
     public static void CriarPersonagem() {
         Scanner input = new Scanner(System.in);
         Boolean selectedOption = false;
@@ -60,8 +56,22 @@ public class Menu {
                 case 6:
                     jogador.exibirAtributos();
                     System.out.println("\nEscolha sua arma:\n");
-                    System.out.println("1 - Claymore\t2 - Sabre\t3 - Cajado\n> ");
+                    System.out.println("1 - Claymore (Pesada)\t2 - Sabre (Leve)\t3 - Cajado\n> ");
+                    switch (input.nextInt()) {
+                        case 1:
+                            jogador.setArma(new Arma("Claymore", "Pesada"));
+                            break;
+
+                        case 2:
+                            jogador.setArma(new Arma("Sabre", "Leve"));
+                            break;
+
+                        case 3:
+                            jogador.setArma(new Arma("Cajado", "Mágica"));
                     
+                        default:
+                            break;
+                    }
                     
                 default:
                     jogador.exibirAtributos();

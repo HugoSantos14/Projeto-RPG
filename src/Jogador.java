@@ -1,12 +1,29 @@
 public class Jogador {
     public String nome;
     public int hp = 0;
-
+    private Arma arma;
+    private int dano = 0;
     private int força = 0;
     private int resistência = 0;
     private int agilidade = 0;
     private int destreza = 0;
     private int inteligência = 0;
+
+    public Arma getArma() {
+        return arma;
+    }
+
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    public int getDano() {
+        return dano;
+    }
+
+    public void setDano(int dano) {
+        this.dano = dano;
+    }
 
     public int getForça() {
         return força;
