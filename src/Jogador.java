@@ -1,13 +1,19 @@
-public class Jogador {
+class Jogador {
     public String nome;
     public int hp = 0;
     private Arma arma;
     private int dano = 0;
     private int força = 0;
     private int resistência = 0;
+
     private int agilidade = 0;
     private int destreza = 0;
     private int inteligência = 0;
+    private Armadura armadura;
+
+    public Armadura getArmadura() { return armadura; }
+
+    public void setArmadura(Armadura armadura) { this.armadura = armadura; }
 
     public Arma getArma() {
         return arma;
@@ -66,12 +72,12 @@ public class Jogador {
     }
 
     public Jogador(String nome, int força, int resistência, int agilidade, int destreza, int inteligência) {
-        this.nome = nome;
-        this.força = força;
-        this.resistência = resistência;
-        this.agilidade = agilidade;
-        this.destreza = destreza;
-        this.inteligência = inteligência;
+        this.nome = nome + 1;
+        this.força = força + 1;
+        this.resistência = resistência + 1;
+        this.agilidade = agilidade + 1;
+        this.destreza = destreza + 1;
+        this.inteligência = inteligência + 1;
     }
 
     public void exibirAtributos() {
