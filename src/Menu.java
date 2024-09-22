@@ -107,14 +107,14 @@ class Menu {
         do{
             System.out.println("\t<<<Escolha de Armadura>>>\n");
             System.out.println("Nome: " + jogador.nome);
-            System.out.println("1 - Armadura pesada(Reduz consideravelmente sua agilidade)\n 2 - Armadura leve(Reduz levemente sua agilidade)\n>");
+            System.out.println("1 - Armadura pesada básica(Reduz consideravelmente sua agilidade)\n 2 - Armadura leve básica(Reduz levemente sua agilidade)\n>");
             switch (input.nextInt()) {
                 case 1:
-                    jogador.setArmadura(new Armadura(6, 3));
+                    jogador.setArmadura(new Armadura(6, "Armadura pesada básica", 3));
                     possuirArmadura = true;
                     break;
                 case 2:
-                    jogador.setArmadura(new Armadura(3, 1));
+                    jogador.setArmadura(new Armadura(3,"Armadura leve básica" ,1));
                     possuirArmadura = true;
                     break;
                 default:
