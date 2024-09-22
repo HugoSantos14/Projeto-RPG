@@ -1,15 +1,25 @@
  class Armadura {
-     public Double ConstDedefesa;
+     private int ConstDefesa;
+     private int redAgilidade;
 
-     public Double getConstDedefesa() {
-         return ConstDedefesa;
+     public Armadura(int constDefesa, int redAgilidade) {
+         this.ConstDefesa = constDefesa;
+         this.redAgilidade = redAgilidade;
      }
 
-     public void setConstDedefesa(Double constDedefesa) {
-         ConstDedefesa = constDedefesa;
+     public int getConstDefesa() {
+         return ConstDefesa;
      }
 
-     public Armadura(Double constDedefesa) {
-         this.ConstDedefesa = constDedefesa;
+     public void setConstDefesa(int constDefesa) {
+         ConstDefesa = constDefesa;
+     }
+
+     public int getRedAgilidade() {
+         return redAgilidade;
+     }
+
+     public void setRedAgilidade(int redAgilidade) {
+         this.redAgilidade = redAgilidade;
      }
  }
