@@ -75,7 +75,7 @@ class Menu {
                 default:
                     break;
             }
-        Console.clear();
+            Console.clear();
         }while(pontos>0);
         boolean possuirArma = false;
         do {
@@ -116,6 +116,8 @@ class Menu {
                 case 2:
                     jogador.setArmadura(new Armadura(3, 1));
                     possuirArmadura = true;
+                    break;
+                default:
                     break;
             }
         }while(possuirArmadura = false);
