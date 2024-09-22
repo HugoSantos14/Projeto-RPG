@@ -1,7 +1,23 @@
-public class Arma {
+class Arma {
     public String nome;
     public String categoria;
-    private final double constDano = 0.5;
+    private double constDano;
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public double getConstDano() {
+        return constDano;
+    }
+
+    public void setConstDano(double constDano) {
+        this.constDano = constDano;
+    }
 
     public String getNome() {
         return nome;
@@ -11,21 +27,9 @@ public class Arma {
         this.nome = nome;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
+    public Arma(String categoria, double constDano, String nome) {
         this.categoria = categoria;
-    }
-    
-    public double getConstDano() {
-        return constDano;
-    }
-
-    public Arma(String nome, String categoria) {
+        this.constDano = constDano;
         this.nome = nome;
-        this.categoria = categoria;
     }
-
 }
