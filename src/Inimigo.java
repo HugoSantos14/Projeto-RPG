@@ -1,34 +1,10 @@
-public class Inimigo {
-    private String nome;
-    private int hpmax;
-    private int hp;
+public class Inimigos
+{
+    private int HpMax;
+    private int Hp;
     private int dano;
     private int armadura;
     private int agilidade;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getHpmax() {
-        return hpmax;
-    }
-
-    public void setHpmax(int hpmax) {
-        this.hpmax = hpmax;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
 
     public int getAgilidade() {
         return agilidade;
@@ -54,11 +30,22 @@ public class Inimigo {
         this.dano = dano;
     }
 
-    public Inimigo(int agilidade, int armadura, int dano, int hp) {
+    public int getHp() {
+        return Hp;
+    }
+
+    public void setHp(int hp) {
+        this.Hp = hp;
+    }
+
+    public Inimigos(int agilidade, int armadura, int dano, int hp) {
         this.agilidade = agilidade;
         this.armadura = armadura;
         this.dano = dano;
-        this.hp = hp;
-        hpmax = hp;
+        this.Hp = hp;
+        this.HpMax = Hp;
+    }
+
+    public void setHp() {
     }
 }
