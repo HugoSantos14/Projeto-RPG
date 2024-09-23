@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Menu {
     private static int pontos = 15;
+    public static Scanner input = new Scanner(System.in);
 
     public static void CriarPersonagem() {
-        Scanner input = new Scanner(System.in);
 
         System.out.println("\t<<<Diga seu nome!>>>\n");
         System.out.print("Nome: ");
@@ -121,30 +121,32 @@ public class Menu {
             }
         }while(possuirArmadura = false);
         System.out.printf("\tBem-vindo(a) a Eldorath, %s!\n Sua aventura vai iniciar nesse momento!\n", jogador.nome);
-        input.close();
+        // input.close();
     }
 
     public static void História() {
+        // Scanner input = new Scanner(System.in);
         Console.clear();
         System.out.println("Você é um jovem aventureiro de uma pequena aldeia, famoso por sua coragem e sede de descobrir segredos antigos.");
-        System.out.println("Nos últimos meses, rumores sobre uma masmorra há muito esquecida, conhecida como A Masmorra de Eldorath, têm circulado pelas tavernas da região.");
+        System.out.println("Nos últimos meses, rumores sobre uma masmorra há muito esquecida, conhecida como A Masmorra de Eldorath, têm circulado pelas tavernas da região.\n");
         Console.pause();
         Console.clear();
         System.out.println("Escondida nas profundezas das montanhas ao norte, Eldorath é dita guardar riquezas incalculáveis e poderes antigos,");
-        System.out.println("mas sua reputação é sombria: nenhum aventureiro que ousou entrar lá voltou para contar a história.");
+        System.out.println("mas sua reputação é sombria: nenhum aventureiro que ousou entrar lá voltou para contar a história.\n");
         Console.pause();
         Console.clear();
-        System.out.println("Movido pela curiosidade, ambição e a promessa de glória, você decide partir em busca da masmorra lendária...");
+        System.out.println("Movido pela curiosidade, ambição e a promessa de glória, você decide partir em busca da masmorra lendária...\n");
         Console.pause();
         Console.clear();
         System.out.println("Você se aproxima da entrada de Eldorath. As pedras da entrada estão cobertas de musgo e o ar, pesado e úmido, cheira a perigo e mistério.");
-        System.out.println("Uma sensação de perigo iminente paira no ar.");
+        System.out.println("Uma sensação de perigo iminente paira no ar.\n");
         Console.pause();
         Console.clear();
+        // input.close();
     }
 
     public static void menuDeCombate() {
-        Scanner input = new Scanner(System.in);
+        // Scanner input = new Scanner(System.in);
         System.out.println("|=================================|");
         System.out.println("|        MENU DE BATALHA          |");
         System.out.println("|=================================|");
@@ -167,6 +169,6 @@ public class Menu {
                 System.out.println("Opção inválida! Tente novamente.");
                 break;
         }
-    input.close();
+        // input.close();
     }
 }
