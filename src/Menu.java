@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Menu {
     private static int pontos = 15;
-    static Inimigos slime = new Inimigos(5,5,5,5);
+    static Inimigos slime = new Inimigos(5,6,20,5);
     static Dado d2 = new Dado(2);
 
     public static void CriarPersonagem() {
@@ -158,6 +158,7 @@ class Menu {
         System.out.println("\t<<<Diga seu nome!>>>\n");
         System.out.print("Nome: ");
         Jogador jogador = new Jogador(input.nextLine(), 0, 0, 0, 0, 0);
+        jogador.setForça(1);
         Console.clear();
 
         do{
@@ -234,17 +235,16 @@ class Menu {
             switch (input.nextInt()) {
                 case 1:
                     jogador.setArma(new Arma("Pesada", 10, "Claymore"));
-
                     possuirArma = true;
                     break;
 
                 case 2:
-                    jogador.setArma(new Arma("leve", 1.2, "sabre"));
+                    jogador.setArma(new Arma("leve", 10, "sabre"));
                     possuirArma = true;
                     break;
 
                 case 3:
-                    jogador.setArma(new Arma("mágica", 1.3, "cajado" ));
+                    jogador.setArma(new Arma("mágica", 10, "cajado" ));
                     possuirArma = true;
 
                 default:
@@ -299,20 +299,22 @@ class Menu {
                         System.out.println("=================================");
                         System.out.print("Escolha uma ação: ");
                         int escolha = input.nextInt();
-                        switch (1) {
+                        switch (escolha) {
                             case 1:
                                 System.out.println("Você escolheu: Atacar!");
                                 if (jogador.getArma().categoria == "Pesada")
                                 {
-                                int Dano = 0;
-                                Dano = slime.getArmadura() - jogador.getDanoP();
-                                int DanoResultante = slime.getHp() - Dano;
-                                slime.setHp(DanoResultante);
+                                  int danoConst = jogador.getArma().getConstDano();
+                                    jogador.getArma().setDanoPesada(danoConst);
+                                    System.out.println(jogador.getArma().getDanoPesada());
+                                    slime.setHp();
+                                    System.out.println("O dano realizado foi de ");
                                     if(slime.getHp()<=0){
                                         System.out.println("Vc derrotou o slime!");
                                         break;
-                                    } else { System.out.printf("\nVc causou %d ao slime!\n", Dano);}
+                                    } else { System.out.printf("\nVc causou %d ao slime!\n");}
                                 }
+
                                 else if (jogador.getArma().categoria == "Leve")
                                 {
                                     int Dano = 0;
@@ -325,13 +327,14 @@ class Menu {
                                         } else { System.out.printf("\nVc causou %d ao slime!\n", Dano);}
 
                                 }
+                                break;
                             case 2:
                                 System.out.println("Você escolheu: Defender!");
-
+                                break;
 
                             case 3:
                                 System.out.println("Você escolheu: Usar Item!");
-
+                                break;
                             default:
                                 System.out.println("Opção inválida! Tente novamente.");
 
