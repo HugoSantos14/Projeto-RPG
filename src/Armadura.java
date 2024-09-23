@@ -1,7 +1,18 @@
  class Armadura {
+    Jogador jogador;
     private String nome;
      private int ConstDefesa;
      private int redAgilidade;
+
+     public double getDefesa() {
+         return defesa;
+     }
+
+     public void setDefesa(int defesa) {
+         this.defesa = this.ConstDefesa+ 1.5*jogador.getResistência();
+     }
+
+     private double defesa;
 
      public Armadura(int constDefesa, String nome, int redAgilidade) {
          this.ConstDefesa = constDefesa;
