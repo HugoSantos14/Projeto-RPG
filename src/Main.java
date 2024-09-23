@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class App {
+public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Console.clear();
@@ -15,12 +15,15 @@ public class App {
             System.out.println("                                                                               __/ |                    ");
             System.out.println("                                                                              |___/                     ");
     
-            System.out.println("1 - Jogar\t 2 - Sair\n\n");
+            System.out.print("1 - Jogar\n2 - História\n3 - Sair\n\n> ");
             int selectedOption = input.nextInt();
             Console.clear();
             if (selectedOption == 1) {
                 Menu.CriarPersonagem();
+                Menu.História();
             } else if (selectedOption == 2) {
+                Menu.História();
+            } else if (selectedOption == 3) {
                 break;
             }
         }
