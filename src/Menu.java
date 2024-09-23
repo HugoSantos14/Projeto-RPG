@@ -107,7 +107,7 @@ class Menu {
         do{
             System.out.println("\t<<<Escolha de Armadura>>>\n");
             System.out.println("Nome: " + jogador.nome);
-            System.out.println("1 - Armadura pesada básica(Reduz consideravelmente sua agilidade)\n 2 - Armadura leve básica(Reduz levemente sua agilidade)\n>");
+            System.out.print("1 - Armadura pesada básica(Reduz consideravelmente sua agilidade)\n2 - Armadura leve básica(Reduz levemente sua agilidade)\n>");
             switch (input.nextInt()) {
                 case 1:
                     jogador.setArmadura(new Armadura(6, "Armadura pesada básica", 3));
@@ -121,9 +121,35 @@ class Menu {
                     break;
             }
         }while(possuirArmadura = false);
-
-
-
+        System.out.printf("\tBem-vindo %s a Eldorath!\n Sua aventura vai iniciar nesse momento!\n", jogador.nome);
+        input.close();
     }
 
+    public static void menuDeCombate() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("|=================================|");
+        System.out.println("|        MENU DE BATALHA          |");
+        System.out.println("|=================================|");
+        System.out.println("| 1. Atacar                       |");
+        System.out.println("| 2. Defender                     |");
+        System.out.println("| 3. Usar Poção                   |");
+        System.out.println("|=================================|");
+        System.out.print("Escolha uma ação: ");
+        switch (input.nextInt()) {
+            case 1:
+                System.out.println("Você escolheu: Atacar!");
+                break;
+            case 2:
+                System.out.println("Você escolheu: Defender!");
+                break;
+            case 3:
+                System.out.println("Você escolheu: Usar Item!");
+                break;
+            default:
+                System.out.println("Opção inválida! Tente novamente.");
+                break;
+        }
+    input.close();
+
+    }
 }
