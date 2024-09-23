@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Console {
     public static void clear() {
@@ -11,5 +12,12 @@ public class Console {
         } catch (IOException | InterruptedException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void pause() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Pressione Enter para continuar...");
+        input.nextLine();
+        input.close();
     }
 }
