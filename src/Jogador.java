@@ -72,7 +72,7 @@ class Jogador {
     }
 
     public Jogador(String nome, int força, int resistência, int agilidade, int destreza, int inteligência) {
-        this.nome = nome + 1;
+        this.nome = nome;
         this.força = força + 1;
         this.resistência = resistência + 1;
         this.agilidade = agilidade + 1;
