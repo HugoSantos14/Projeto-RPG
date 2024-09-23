@@ -306,10 +306,23 @@ class Menu {
                                 {
                                 int Dano = 0;
                                 Dano = slime.getArmadura() - jogador.getDanoP();
-                                slime.setHp() = slime.getHp() - Dano;
+                                int DanoResultante = slime.getHp() - Dano;
+                                slime.setHp(DanoResultante);
+                                    if(slime.getHp()<=0){
+                                        System.out.println("Vc derrotou o slime!");
+                                        break;
+                                    } else { System.out.printf("\nVc causou %d ao slime!\n", Dano);}
                                 }
                                 else if (jogador.getArma().categoria == "Leve")
                                 {
+                                    int Dano = 0;
+                                    Dano = slime.getArmadura() - jogador.getDanoL();
+                                    int DanoResultante = slime.getHp() - Dano;
+                                    slime.setHp(DanoResultante);
+                                    if(slime.getHp()<=0){
+                                        System.out.println("Vc derrotou o slime!");
+                                        break;
+                                        } else { System.out.printf("\nVc causou %d ao slime!\n", Dano);}
 
                                 }
                             case 2:
