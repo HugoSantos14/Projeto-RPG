@@ -2,7 +2,7 @@ class Arma {
     Jogador jogador;
     public String nome;
     public String categoria;
-    private double constDano;
+    public int constDano;
     private int danoPesada;
     private int danoLeve;
     Dado d6 = new Dado (6);
@@ -15,15 +15,15 @@ class Arma {
     }
 
     public void setDanoLeve(int danoLeve) {
-        this.danoLeve = (int) (this.getConstDano()+ d6.Lançar()+ d6.Lançar()+ d4.Lançar()+jogador.getDestreza());
+        this.danoLeve = danoLeve;
     }
 
     public int getDanoPesada() {
         return danoPesada;
     }
 
-    public void setDanoPesada(int danoPesada) {
-        this.danoPesada = (int) (this.constDano + d12.Lançar() + jogador.getForça()*1.5);
+    public void setDanoPesada( int constDano) {
+        this.danoPesada = constDano;
     }
 
     public String getCategoria() {
@@ -34,11 +34,11 @@ class Arma {
         this.categoria = categoria;
     }
 
-    public double getConstDano() {
-        return constDano;
+    public int getConstDano() {
+        return (int) constDano;
     }
 
-    public void setConstDano(double constDano) {
+    public void setConstDano(int constDano) {
         this.constDano = constDano;
     }
 
@@ -50,7 +50,7 @@ class Arma {
         this.nome = nome;
     }
 
-    public Arma(String categoria, double constDano, String nome) {
+    public Arma(String categoria, int constDano, String nome) {
         this.categoria = categoria;
         this.constDano = constDano;
         this.nome = nome;
