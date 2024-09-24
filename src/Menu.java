@@ -2,11 +2,8 @@ import java.util.Scanner;
 
 class Menu {
     private static int pontos = 15;
-    //inimigos Segundo combate:
-    static Inimigos morcegoGigante = new Inimigos(10,7,11,30);
-    static Inimigos orc = new Inimigos(10,9,12,50);
     // Boss final:
-    static Inimigos cavaleiroCorrompido = new Inimigos(20,15,20,70);
+    static Inimigos cavaleiroSagradoCorrompido = new Inimigos(20,15,20,70);
     static Dado d2 = new Dado(2);
     static Pocao pocao;
     static Dado d3 = new Dado(3);
@@ -118,14 +115,14 @@ class Menu {
         do{
             System.out.println("\t<<<Escolha de Armadura>>>\n");
             System.out.println("Nome: " + jogador.nome);
-            System.out.print("1 - Armadura pesada básica(Reduz consideravelmente sua agilidade)\n2 - Armadura leve básica(Reduz levemente sua agilidade)\n>");
+            System.out.print("1 - Armadura pesada de ferro\n2 - Armadura leve de couro\n>");
             switch (input.nextInt()) {
                 case 1:
-                    jogador.setArmadura(new Armadura(6, "Armadura pesada básica", 3));
+                    jogador.setArmadura(new Armadura(6, "Armadura pesada de ferro", 3));
                     possuirArmadura = true;
                     break;
                 case 2:
-                    jogador.setArmadura(new Armadura(3,"Armadura leve básica" ,1));
+                    jogador.setArmadura(new Armadura(3,"Armadura leve de couro" ,1));
                     possuirArmadura = true;
                     break;
                 default:
@@ -135,6 +132,7 @@ class Menu {
         jogador.setHp(jogador.getResistência());
         System.out.printf("\tBem-vindo %s a Eldorath!\n Sua aventura vai iniciar nesse momento!\n", jogador.nome);
         Console.clear();
+        System.out.println("Bem vindo "+ jogador.nome +" ao primeiro andar da Dungeon");
 // A partir dessa parte é o sistema de luta!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         int Uso_de_pocoes = 3;
         System.out.println("Vc encontrou um inimigo");
@@ -177,7 +175,7 @@ class Menu {
                                     if (slime.getHp() <= 0) {
                                         System.out.println("Vc derrotou o slime!");
                                         break;
-                                    } else {
+                                    } else if(slime.getHp>0) {
                                         System.out.println("O slime aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -189,7 +187,7 @@ class Menu {
                                     if (slime.getHp() <= 0) {
                                         System.out.println("Vc derrotou o slime!");
                                         break;
-                                    } else {
+                                    } else if(slime.getHp>0) {
                                         System.out.println("O slime aguentou o ataque!!");
                                     }
                                 }
@@ -220,7 +218,7 @@ class Menu {
                                 System.out.println("    O Slime te atacou!");
                                 System.out.println("=================================");
                                 jogador.setHp(jogador.getHp() - slime.getDano() + jogador.getDefesa());
-                                System.out.println("\nVida atual "+ slime.getHp());
+                                System.out.println("Vida atual "+ slime.getHp());
                                 System.out.println("=================================");
                                 break;
                             case 2:
@@ -296,7 +294,7 @@ class Menu {
                                             if (slime.getHp() >= 0) {
                                                 System.out.println("Vc derrotou o slime!");
                                                 break;
-                                            } else {
+                                            } else if(slime.getHp>0) {
                                                 System.out.println("O slime aguentou o ataque!!");
                                             }
                                         } else if (jogador.getArma().categoria == "leve") {
@@ -308,7 +306,7 @@ class Menu {
                                             if (slime.getHp() <= 0) {
                                                 System.out.println("Vc derrotou o slime!");
                                                 break;
-                                            } else {
+                                            } else if(slime.getHp>0) {
                                                 System.out.println("O slime aguentou o ataque!!");
                                             }
                                         }
@@ -387,7 +385,7 @@ class Menu {
                                     if (slime.getHp() <= 0) {
                                         System.out.println("Vc derrotou o slime!");
                                         break;
-                                    } else {
+                                    } else if(slime.getHp>0) {
                                         System.out.println("O slime aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -454,10 +452,10 @@ class Menu {
                                     System.out.println(esqueleto.getHp());
                                     System.out.println("Vida restante do esqueleto: " + esqueleto.getHp());
                                     System.out.println("Dano realizado: " + jogador.getDanoP());
-                                    if (slime.getHp() <= 0) {
+                                    if (esqueleto.getHp() <= 0) {
                                         System.out.println("Vc derrotou o esqueleto!");
                                         break;
-                                    } else {
+                                    } else if(esqueleto.getHp>0) {
                                         System.out.println("O esqueleto aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -469,7 +467,7 @@ class Menu {
                                     if (esqueleto.getHp() <= 0) {
                                         System.out.println("Vc derrotou o esqueleto!");
                                         break;
-                                    } else {
+                                    } else if(esqueleto.getHp>0) {
                                         System.out.println("O esqueleto aguentou o ataque!!");
                                     }
                                 }
@@ -576,7 +574,7 @@ class Menu {
                                             if (esqueleto.getHp() >= 0) {
                                                 System.out.println("Vc derrotou o esqueleto!");
                                                 break;
-                                            } else {
+                                            } else if(esqueleto.getHp>0) {
                                                 System.out.println("O esqueleto aguentou o ataque!!");
                                             }
                                         } else if (jogador.getArma().categoria == "leve") {
@@ -588,7 +586,7 @@ class Menu {
                                             if (esqueleto.getHp() <= 0) {
                                                 System.out.println("Vc derrotou o esqueleto!");
                                                 break;
-                                            } else {
+                                            } else if(esqueleto.getHp>0) {
                                                 System.out.println("O esqueleto aguentou o ataque!!");
                                             }
                                         }
@@ -667,7 +665,7 @@ class Menu {
                                     if (esqueleto.getHp() <= 0) {
                                         System.out.println("Vc derrotou o esqueleto!");
                                         break;
-                                    } else {
+                                    } else if(esqueleto.getHp>0) {
                                         System.out.println("O esqueleto aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -679,7 +677,7 @@ class Menu {
                                     if (esqueleto.getHp() <= 0) {
                                         System.out.println("Vc derrotou o esqueleto!");
                                         break;
-                                    } else {
+                                    } else if(esqueleto.getHp>0) {
                                         System.out.println("O esqueleto aguentou o ataque!!");
                                     }
                                 }
@@ -733,10 +731,10 @@ class Menu {
                                     System.out.println(goblin.getHp());
                                     System.out.println("Vida restante do goblin: " + goblin.getHp());
                                     System.out.println("Dano realizado: " + jogador.getDanoP());
-                                    if (slime.getHp() <= 0) {
+                                    if (goblin.getHp() <= 0) {
                                         System.out.println("Vc derrotou o goblin!");
                                         break;
-                                    } else {
+                                    } else if(goblin.getHp>0) {
                                         System.out.println("O goblin aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -748,7 +746,7 @@ class Menu {
                                     if (goblin.getHp() <= 0) {
                                         System.out.println("Vc derrotou o goblin!");
                                         break;
-                                    } else {
+                                    } else if(goblin.getHp>0) {
                                         System.out.println("O goblin aguentou o ataque!!");
                                     }
                                 }
@@ -855,7 +853,7 @@ class Menu {
                                             if (goblin.getHp() >= 0) {
                                                 System.out.println("Vc derrotou o goblin!");
                                                 break;
-                                            } else {
+                                            } else if(goblin.getHp>0) {
                                                 System.out.println("O goblin aguentou o ataque!!");
                                             }
                                         } else if (jogador.getArma().categoria == "leve") {
@@ -867,7 +865,7 @@ class Menu {
                                             if (goblin.getHp() <= 0) {
                                                 System.out.println("Vc derrotou o goblin!");
                                                 break;
-                                            } else {
+                                            } else if(goblin.getHp>0) {
                                                 System.out.println("O goblin aguentou o ataque!!");
                                             }
                                         }
@@ -943,10 +941,10 @@ class Menu {
                                     System.out.println(goblin.getHp());
                                     System.out.println("Vida restante do goblin: " + goblin.getHp());
                                     System.out.println("Dano realizado: " + jogador.getDanoP());
-                                    if (esqueleto.getHp() <= 0) {
+                                    if (goblin.getHp() <= 0) {
                                         System.out.println("Vc derrotou o goblin!");
                                         break;
-                                    } else {
+                                    } else if(goblin.getHp>0) {
                                         System.out.println("O goblin aguentou o ataque!!");
                                     }
                                 } else if (jogador.getArma().categoria == "leve") {
@@ -958,7 +956,7 @@ class Menu {
                                     if (goblin.getHp() <= 0) {
                                         System.out.println("Vc derrotou o goblin!");
                                         break;
-                                    } else {
+                                    } else if(goblin.getHp>0) {
                                         System.out.println("O goblin aguentou o ataque!!");
                                     }
                                 }
@@ -989,7 +987,7 @@ class Menu {
         System.out.println(" Vc passou de andar da Dungeon!\n Agora vc Irá enfretar inimigos mais fortes\n Parabens por subir de nivel:");
         System.out.println("Recompensas:10+ de Hp, 5+ Pontos de atributos e escolher 3 armas novas");
         jogador.MaxHp = jogador.getHp()+10;
-        jogador.MaxHp = jogador.hp;
+        jogador.hp = jogador.MaxHp;
         pontos = pontos + 5;
 
         do{
@@ -1058,24 +1056,24 @@ class Menu {
             }
             Console.clear();
         }while(pontos>0);
-
+        possuirArma = false;
         do {
             System.out.println("\t<<<Escolha de arma>>>\n");
             System.out.println("Nome: " + jogador.nome);
             System.out.print("1 - DragonSlayer (Pesada)-->Escala com força\n2 - Yoru (Leve)-->Escala com destreza\n3 - O Cinzento-->Escala com inteligência\n> ");
             switch (input.nextInt()) {
                 case 1:
-                    jogador.setArma(new Arma("Pesada", 10, "DragonSlayer"));
+                    jogador.setArma(new Arma("Pesada", 15, "DragonSlayer"));
                     possuirArma = true;
                     break;
 
                 case 2:
-                    jogador.setArma(new Arma("leve", 8, "Yoru"));
+                    jogador.setArma(new Arma("leve", 10, "Yoru"));
                     possuirArma = true;
                     break;
 
                 case 3:
-                    jogador.setArma(new Arma("mágica", 7, "O Cinzento" ));
+                    jogador.setArma(new Arma("mágica", 9, "O Cinzento" ));
                     possuirArma = true;
 
                 default:
@@ -1083,7 +1081,57 @@ class Menu {
             }
 
         }while(possuirArma = false);
+        Console.clear();
 
+        System.out.println("Bem vindo ao segundo andar da Dungeon");
+        Console.pause();
+        System.out.println("Vc encontrou um inimigo");
+        for(int i =0;i<2;i++)
+        {
+            Inimigos morcegoGigante = new Inimigos(10,7,11,30);
+            Inimigos orc = new Inimigos(10,9,12,50);
+            switch(d2.Lançar())
+            {
+                case 1: //Morcego Gigante
+                
+                case 2: //Orc
+            }
+        }
+        System.out.println("Parabens "+jogador.nome+"!");
+        System.out.println(" Vc passou de andar da Dungeon!\n Agora vc Irá enfretar um inimigo mais forte\n Parabens por subir de nivel:");
+        System.out.println("Recompensas:20+ de Hp, 10+ Pontos de atributos e escolher 3 armaduras novas");
+        jogador.MaxHp += 20;
+        jogador.hp = jogador.MaxHp;
+        pontos = pontos + 10;
 
+        possuirArmadura = false;
+        do{
+            System.out.println("\t<<<Escolha de Armadura>>>\n");
+            System.out.println("Nome: " + jogador.nome);
+            System.out.print("1 - Armadura pesada de ferro\n2 - Armadura leve de couro\n>");
+            switch (input.nextInt()) {
+                case 1:
+                    jogador.setArmadura(new Armadura(15, "Armadura pesada do Havel", 0));
+                    possuirArmadura = true;
+                    break;
+                case 2:
+                    jogador.setArmadura(new Armadura(10,"Armadura leve de  Artorias" ,0));
+                    possuirArmadura = true;
+                    break;
+                case 3:
+                    jogador.setArmadura(new Armadura(5,"Capacete de jarro" ,0));
+                    possuirArmadura = true;
+                break;
+                default:
+                    break;
+            }
+        }while(possuirArmadura = false);
+        Console.clear();
+
+        System.out.println("Bem vindo ao segundo andar da Dungeon");
+        Console.pause();
+        System.out.println("Vc encontrou o Boss:");
+
+        
     }
 }
