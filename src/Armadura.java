@@ -9,7 +9,7 @@
      }
 
      public void setDefesa(int defesa) {
-         this.defesa = this.ConstDefesa+ 1.5*jogador.getResistência();
+         this.defesa = defesa;
      }
 
      private double defesa;
