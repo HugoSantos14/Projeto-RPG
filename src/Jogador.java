@@ -1,26 +1,36 @@
 class Jogador {
     Dado d6 = new Dado(6);
-    private int MaxHp;
+    Dado d4 = new Dado (4);
+    Dado d12 = new Dado (12);
+    public int MaxHp;
     public String nome;
     public int hp = 0;
     private Arma arma;
-    private int danoP = 0;
+    private static int danoP = 0;
     private int danoL = 0;
     private int força = 0;
     private int resistência = 0;
-    private String tipoArma = "";
+    private int defesa;
 
     private int agilidade = 0;
     private int destreza = 0;
     private int inteligência = 0;
     private Armadura armadura;
 
+    public int getDefesa() {
+        return defesa;
+    }
+
+    public void setDefesa(int defesa) {
+        this.defesa =(int)(1.5*getResistência()+defesa);
+    }
+
     public int getDanoL() {
         return danoL;
     }
 
-    public void setDanoL(int danoL) {
-        this.danoL = arma.getDanoLeve();
+    public void setDanoL(int danoConstant) {
+        this.danoL =  d6.Lançar()+ d6.Lançar()+ d4.Lançar() + danoConstant + getDestreza();
     }
 
     public int getHp() {
@@ -43,12 +53,12 @@ class Jogador {
         this.arma = arma;
     }
 
-    public int getDanoP() {
-        return danoP;
+    public static int getDanoP() {
+        return danoP ;
     }
 
-    public void setDanoP(int dano) {
-        this.danoP = arma.getDanoPesada();
+    public void setDanoP(int danoP) {
+        this.danoP = (int) (getForça()*1.5 +d12.Lançar() + danoP);
     }
 
     public int getForça() {
