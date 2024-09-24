@@ -1,16 +1,13 @@
-import java.util.Random;
-
-public class Poção {
-    public int d6pocao() {
-        Random random = new Random();
-        return random.nextInt(6) + 1;
+public class Pocao {
+    static Dado d6 = new Dado(6);
+    public static void JogadorCurar(Jogador jogador)
+    {
+        jogador.setHp(d6.Lançar()+d6.Lançar()+d6.Lançar());
+    }
+    public static void InimigoCurar(Inimigos inimigo)
+    {
+        inimigo.setHp(d6.Lançar()+d6.Lançar()+d6.Lançar());
     }
 
-    public void pocaoInimigo(Inimigo inimigo) {
-        inimigo.setHp(inimigo.getHp() + d6pocao() + d6pocao() + d6pocao());
-    }
 
-    public void pocao(Jogador jogador) {
-        jogador.setHp(jogador.getHp() + d6pocao() + d6pocao() + d6pocao());
-    }
 }
