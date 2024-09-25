@@ -15,9 +15,15 @@ public class Console {
         }
     }
     public static void pause() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Pressione Enter para continuar...");
-        input.nextLine();
-        input.close();
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+            } else {
+                System.out.println("Pressione Enter para continuar...");
+                System.in.read();
+            }
+        } catch (IOException | InterruptedException ex) {
+            ex.printStackTrace();
+        }
     }
 }
