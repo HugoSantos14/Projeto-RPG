@@ -39,7 +39,7 @@ class Menu {
                     if (NPontosF > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setForça(jogador.getForça()+NPontosF);
+                        jogador.setForça(NPontosF);
                         pontos -= jogador.getForça();}
                     break;
                 case 2:
@@ -48,7 +48,7 @@ class Menu {
                     if (NPontosR > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setResistência(jogador.getResistência()+NPontosR);
+                        jogador.setResistência(NPontosR);
                         pontos -= jogador.getResistência();}
                     break;
                 case 3:
@@ -57,7 +57,7 @@ class Menu {
                     if (NPontosA > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setAgilidade(jogador.getAgilidade()+NPontosA);
+                        jogador.setAgilidade(NPontosA);
                         pontos -= jogador.getAgilidade();}
                     break;
                 case 4:
@@ -66,7 +66,7 @@ class Menu {
                     if (NPontosD > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setDestreza(jogador.getDestreza()+NPontosD);
+                        jogador.setDestreza(NPontosD);
                         pontos -= jogador.getDestreza();}
                     break;
                 default:
@@ -78,7 +78,7 @@ class Menu {
         do {
             System.out.println("\t<<<Escolha de arma>>>\n");
             System.out.println("Nome: " + jogador.nome);
-            System.out.print("1 - Claymore (Pesada)-->Escala com força\n2 - Sabre (Leve)-->Escala com destreza\n3 - Cajado-->Escala com inteligência\n> ");
+            System.out.print("1 - Claymore (Pesada)-->Escala com força\n2 - Sabre (Leve)-->Escala com destreza\n3 - Katana-->Escala com Destreza\n> ");
             switch (input.nextInt()) {
                 case 1:
                     jogador.setArma(new Arma("Pesada", 5, "Claymore"));
@@ -1474,7 +1474,7 @@ class Menu {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
                         jogador.setForça(jogador.getForça() + NPontosF);
-                        pontos -= jogador.getForça();}
+                        pontos -= NPontosF;}
                     break;
                 case 2:
                     System.out.print(">Resistência: ");
@@ -1483,7 +1483,7 @@ class Menu {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
                         jogador.setResistência(jogador.getResistência() + NPontosR);
-                        pontos -= jogador.getResistência();}
+                        pontos -= NPontosR;}
                     break;
                 case 3:
                     System.out.print(">Agilidade: ");
@@ -1492,7 +1492,7 @@ class Menu {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
                         jogador.setAgilidade(jogador.getAgilidade() + NPontosA);
-                        pontos -= jogador.getAgilidade();}
+                        pontos -= NPontosA;}
                     break;
                 case 4:
                     System.out.print(">Destreza: ");
@@ -1501,7 +1501,7 @@ class Menu {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
                         jogador.setDestreza(jogador.getDestreza()+NPontosD);
-                        pontos -= jogador.getDestreza();}
+                        pontos -= NPontosD;}
                     break;
                 default:
                     break;
@@ -1512,7 +1512,7 @@ class Menu {
         do {
             System.out.println("\t<<<Escolha de arma>>>\n");
             System.out.println("Nome: " + jogador.nome);
-            System.out.print("1 - DragonSlayer (Pesada)-->Escala com força\n2 - Yoru (Leve)-->Escala com destreza\n3 - O Cinzento-->Escala com inteligência\n> ");
+            System.out.print("1 - DragonSlayer (Pesada)-->Escala com força\n2 - Yoru (Leve)-->Escala com destreza\n3 - Profaned Greatsword-->Escala com Força\n> ");
             switch (input.nextInt()) {
                 case 1:
                     jogador.setArma(new Arma("Pesada", 15, "DragonSlayer"));
