@@ -38,6 +38,10 @@ public class Inimigos
         this.Hp = hp;
     }
 
+    public void setMax(int hp) {
+        this.Hp = hp;
+    }
+
     public Inimigos(int agilidade, int armadura, int dano, int hp) {
         this.agilidade = agilidade;
         this.armadura = armadura;
@@ -49,4 +53,5 @@ public class Inimigos
     public void setHp() {
     }
 }
+
 
