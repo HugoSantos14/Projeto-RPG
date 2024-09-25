@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Menu {
-    private static int pontos = 15;
+    private static int pontos;
     // Boss final:
     static Inimigos cavaleiroSagradoCorrompido = new Inimigos(20,15,20,70);
     static Dado d2 = new Dado(2);
@@ -27,7 +27,7 @@ class Menu {
     public static void HistoriaJogavel()
     {
         Scanner input = new Scanner(System.in);
-
+        pontos = 15;
         System.out.println("\t<<<Diga seu nome!>>>\n");
         System.out.print("Nome: ");
         Jogador jogador = new Jogador(input.nextLine(), 0, 0, 0, 0, 0);
@@ -147,7 +147,7 @@ class Menu {
         System.out.println("Vc encontrou um inimigo");
 
         //inimigo aleatorio:
-        for(int i=0;i<3;i++){
+        for(int i=0;i<2;i++){
             Inimigos slime = new Inimigos(5,6,10,10);//feito!
             Inimigos esqueleto = new Inimigos(6,4,10,10);//feito!
             Inimigos goblin = new Inimigos(6,7,10,12);//feito!
@@ -1499,7 +1499,7 @@ class Menu {
                     if (NPontosF > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setForça(jogador.getForça() + NPontosF);
+                        jogador.setForça(NPontosF+jogador.getForça());
                         pontos -= NPontosF;}
                     break;
                 case 2:
@@ -1508,7 +1508,7 @@ class Menu {
                     if (NPontosR > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setResistência(jogador.getResistência() + NPontosR);
+                        jogador.setResistência(NPontosR+jogador.getResistência());
                         pontos -= NPontosR;}
                     break;
                 case 3:
@@ -1517,7 +1517,7 @@ class Menu {
                     if (NPontosA > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setAgilidade(jogador.getAgilidade() + NPontosA);
+                        jogador.setAgilidade(NPontosA+jogador.getAgilidade());
                         pontos -= NPontosA;}
                     break;
                 case 4:
@@ -1526,7 +1526,7 @@ class Menu {
                     if (NPontosD > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setDestreza(jogador.getDestreza()+NPontosD);
+                        jogador.setDestreza(NPontosD+jogador.getDestreza());
                         pontos -= NPontosD;}
                     break;
                 default:
@@ -2481,8 +2481,8 @@ class Menu {
                     if (NPontosF > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setForça(jogador.getForça()+NPontosF);
-                        pontos -= jogador.getForça();}
+                        jogador.setForça(NPontosF+jogador.getForça());
+                        pontos -= NPontosF;}
                     break;
                 case 2:
                     System.out.print(">Resistência: ");
@@ -2490,8 +2490,8 @@ class Menu {
                     if (NPontosR > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setResistência(jogador.getResistência()+NPontosR);
-                        pontos -= jogador.getResistência();}
+                        jogador.setResistência(NPontosR+jogador.getResistência());
+                        pontos -= NPontosR;}
                     break;
                 case 3:
                     System.out.print(">Agilidade: ");
@@ -2499,8 +2499,8 @@ class Menu {
                     if (NPontosA > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setAgilidade(jogador.getAgilidade()+NPontosA);
-                        pontos -= jogador.getAgilidade();}
+                        jogador.setAgilidade(NPontosA+jogador.getAgilidade());
+                        pontos -= NPontosA;}
                     break;
                 case 4:
                     System.out.print(">Destreza: ");
@@ -2508,8 +2508,8 @@ class Menu {
                     if (NPontosD > pontos) {
                         System.out.println("Erro ao direcionar os pontos.");
                     } else {
-                        jogador.setDestreza(jogador.getDestreza()+NPontosD);
-                        pontos -= jogador.getDestreza();}
+                        jogador.setDestreza(NPontosD+jogador.getDestreza());
+                        pontos -= NPontosD;}
                     break;
                 default:
                     break;
