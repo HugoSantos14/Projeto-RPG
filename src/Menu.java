@@ -997,7 +997,7 @@ class Menu {
                                         jogador.setDanoL(jogador.getArma().constDano);
                                         esqueleto.setHp(esqueleto.getHp() - (jogador.getDanoL() - esqueleto.getArmadura()));
                                         System.out.println(esqueleto.getHp());
-                                        System.out.println("Vida restante do slime: " + esqueleto.getHp());
+                                        System.out.println("Vida restante do esqueleto: " + esqueleto.getHp());
                                         System.out.println("Dano realizado: " + jogador.getDanoP());
                                         if (esqueleto.getHp() <= 0) {
                                             System.out.println("Vc derrotou o esqueleto!");
@@ -1109,7 +1109,7 @@ class Menu {
                                         System.out.println("=================================");
                                         if(goblin.getDano()> jogador.getDefesa()) {
                                             jogador.hp = jogador.getHp() - goblin.getDano() + jogador.getDefesa();
-                                            System.out.println("Vida atual " + esqueleto.getHp());
+                                            System.out.println("Vida atual " + goblin.getHp());
                                             System.out.println("=================================");
                                             if (jogador.getHp() <= 0) {
                                                 System.out.println("=================================");
@@ -1155,7 +1155,7 @@ class Menu {
                                                 System.out.println("=================================");
                                                 if(goblin.getDano()> jogador.getDefesa()) {
                                                     jogador.hp = jogador.getHp() - goblin.getDano() + jogador.getDefesa();
-                                                    System.out.println("Vida atual " + esqueleto.getHp());
+                                                    System.out.println("Vida atual " + goblin.getHp());
                                                     System.out.println("=================================");
                                                     if (jogador.getHp() <= 0) {
                                                         System.out.println("=================================");
@@ -1207,7 +1207,7 @@ class Menu {
                                                     jogador.setDanoP(jogador.getArma().constDano);//dano
                                                     goblin.setHp(goblin.getHp() - (jogador.getDanoP() - goblin.getArmadura()));
                                                     System.out.println(goblin.getHp());
-                                                    System.out.println("Vida restante do esqueleto: " + goblin.getHp());
+                                                    System.out.println("Vida restante do goblin: " + goblin.getHp());
                                                     System.out.println("Dano realizado: " + jogador.getDanoP());
                                                     if (goblin.getHp() >= 0) {
                                                         System.out.println("Vc derrotou o goblin!");
@@ -1219,7 +1219,7 @@ class Menu {
                                                     jogador.setDanoL(jogador.getArma().constDano);
                                                     goblin.setHp(goblin.getHp() - (jogador.getDanoL() - goblin.getArmadura()));
                                                     System.out.println(goblin.getHp());
-                                                    System.out.println("Vida restante do esqueleto: " + goblin.getHp());
+                                                    System.out.println("Vida restante do goblin: " + goblin.getHp());
                                                     System.out.println("Dano realizado: " + jogador.getDanoP());
                                                     if (goblin.getHp() <= 0) {
                                                         System.out.println("Vc derrotou o goblin!");
@@ -1273,7 +1273,7 @@ class Menu {
                                                 jogador.setDanoP(jogador.getArma().constDano);//dano
                                                 goblin.setHp(goblin.getHp() - (jogador.getDanoP() - goblin.getArmadura()));
                                                 System.out.println(goblin.getHp());
-                                                System.out.println("Vida restante do esqueleto: " + goblin.getHp());
+                                                System.out.println("Vida restante do goblin: " + goblin.getHp());
                                                 System.out.println("Dano realizado: " + jogador.getDanoP());
                                                 if (goblin.getHp() >= 0) {
                                                     System.out.println("Vc derrotou o goblin!");
@@ -1285,7 +1285,7 @@ class Menu {
                                                 jogador.setDanoL(jogador.getArma().constDano);
                                                 goblin.setHp(goblin.getHp() - (jogador.getDanoL() - goblin.getArmadura()));
                                                 System.out.println(goblin.getHp());
-                                                System.out.println("Vida restante do esqueleto: " + goblin.getHp());
+                                                System.out.println("Vida restante do goblin: " + goblin.getHp());
                                                 System.out.println("Dano realizado: " + jogador.getDanoP());
                                                 if (goblin.getHp() <= 0) {
                                                     System.out.println("Vc derrotou o goblin!");
@@ -1324,7 +1324,7 @@ class Menu {
                                                 System.out.println("    O goblin te atacou!");
                                                 if(goblin.getDano()> jogador.getDefesa()) {
                                                     jogador.hp = jogador.getHp() - goblin.getDano() + jogador.getDefesa();
-                                                    System.out.println("Vida atual " + esqueleto.getHp());
+                                                    System.out.println("Vida atual " + goblin.getHp());
                                                     System.out.println("=================================");
                                                     if (jogador.getHp() <= 0) {
                                                         System.out.println("=================================");
@@ -1370,7 +1370,7 @@ class Menu {
                                         System.out.println("=================================");
                                         if(goblin.getDano()> jogador.getDefesa()) {
                                             jogador.hp = jogador.getHp() - goblin.getDano() + jogador.getDefesa();
-                                            System.out.println("Vida atual " + esqueleto.getHp());
+                                            System.out.println("Vida atual " + goblin.getHp());
                                             System.out.println("=================================");
                                             if (jogador.getHp() <= 0) {
                                                 System.out.println("=================================");
@@ -1435,7 +1435,7 @@ class Menu {
                                         jogador.setDanoL(jogador.getArma().constDano);
                                         goblin.setHp(goblin.getHp() - (jogador.getDanoL() - goblin.getArmadura()));
                                         System.out.println(goblin.getHp());
-                                        System.out.println("Vida restante do slime: " + goblin.getHp());
+                                        System.out.println("Vida restante do goblin: " + goblin.getHp());
                                         System.out.println("Dano realizado: " + jogador.getDanoP());
                                         if (goblin.getHp() <= 0) {
                                             System.out.println("Vc derrotou o goblin!");
@@ -1600,7 +1600,7 @@ class Menu {
                                                     System.out.println("Vc derrotou o morcego gigante!");
                                                     break;
                                                 } else if (morcegoGigante.getHp() > 0) {
-                                                    System.out.println("O slime aguentou o morcego gigante!!");
+                                                    System.out.println("O morcego gigante aguentou o dano!!");
                                                 }
                                             } else if (jogador.getArma().categoria == "leve") {
                                                 jogador.setDanoL(jogador.getArma().constDano);
@@ -1642,7 +1642,7 @@ class Menu {
                                         System.out.println("=================================");
                                         switch (d3.Lançar()) {
                                             case 1:
-                                                System.out.println("    O morceg gigante te atacou!");
+                                                System.out.println("    O morcego gigante te atacou!");
                                                 System.out.println("=================================");
                                                 if(morcegoGigante.getDano()> jogador.getDefesa()) {
                                                     jogador.hp = jogador.getHp() - morcegoGigante.getDano() + jogador.getDefesa();
@@ -1744,7 +1744,7 @@ class Menu {
                                                             jogador.setDanoP(jogador.getArma().constDano);//dano
                                                             morcegoGigante.setHp(morcegoGigante.getHp() - (jogador.getDanoP() - morcegoGigante.getArmadura()));
                                                             System.out.println(morcegoGigante.getHp());
-                                                            System.out.println("Vida restante do slime: " + morcegoGigante.getHp());
+                                                            System.out.println("Vida restante do morcego gigante: " + morcegoGigante.getHp());
                                                             System.out.println("Dano realizado: " + jogador.getDanoP());
                                                             if (morcegoGigante.getHp() >= 0) {
                                                                 System.out.println("Vc derrotou o morcego gigante!");
@@ -1756,7 +1756,7 @@ class Menu {
                                                             jogador.setDanoL(jogador.getArma().constDano);
                                                             morcegoGigante.setHp(morcegoGigante.getHp() - (jogador.getDanoL() - morcegoGigante.getArmadura()));
                                                             System.out.println(morcegoGigante.getHp());
-                                                            System.out.println("Vida restante do morceg gigante: " + morcegoGigante.getHp());
+                                                            System.out.println("Vida restante do morcego gigante: " + morcegoGigante.getHp());
                                                             System.out.println("Dano realizado: " + jogador.getDanoP());
                                                             if (morcegoGigante.getHp() <= 0) {
                                                                 System.out.println("Vc derrotou o morcego gigante!");
@@ -1810,7 +1810,7 @@ class Menu {
                                                         jogador.setDanoP(jogador.getArma().constDano);//dano
                                                         morcegoGigante.setHp(morcegoGigante.getHp() - (jogador.getDanoP() - morcegoGigante.getArmadura()));
                                                         System.out.println(morcegoGigante.getHp());
-                                                        System.out.println("Vida restante do slime: " + morcegoGigante.getHp());
+                                                        System.out.println("Vida restante do morcego gigante: " + morcegoGigante.getHp());
                                                         System.out.println("Dano realizado: " + jogador.getDanoP());
                                                         if (morcegoGigante.getHp() >= 0) {
                                                             System.out.println("Vc derrotou o morcego gigante!");
@@ -1973,7 +1973,7 @@ class Menu {
                                                 jogador.setDanoL(jogador.getArma().constDano);
                                                 morcegoGigante.setHp(morcegoGigante.getHp() - (jogador.getDanoL() - morcegoGigante.getArmadura()));
                                                 System.out.println(morcegoGigante.getHp());
-                                                System.out.println("Vida restante do slime: " + morcegoGigante.getHp());
+                                                System.out.println("Vida restante do morcego gigante: " + morcegoGigante.getHp());
                                                 System.out.println("Dano realizado: " + jogador.getDanoP());
                                                 if (morcegoGigante.getHp() <= 0) {
                                                     System.out.println("Vc derrotou o morcego gigante!");
@@ -2185,13 +2185,13 @@ class Menu {
                                                                     jogador.setDanoP(jogador.getArma().constDano);//dano
                                                                     orc.setHp(orc.getHp() - (jogador.getDanoP() - orc.getArmadura()));
                                                                     System.out.println(orc.getHp());
-                                                                    System.out.println("Vida restante do slime: " + orc.getHp());
+                                                                    System.out.println("Vida restante do orc: " + orc.getHp());
                                                                     System.out.println("Dano realizado: " + jogador.getDanoP());
                                                                     if (orc.getHp() >= 0) {
-                                                                        System.out.println("Vc derrotou o slime!");
+                                                                        System.out.println("Vc derrotou o orc!");
                                                                         break;
                                                                     } else if (orc.getHp() > 0) {
-                                                                        System.out.println("O slime aguentou o ataque!!");
+                                                                        System.out.println("O orc aguentou o ataque!!");
                                                                     }
                                                                 } else if (jogador.getArma().categoria == "leve") {
                                                                     jogador.setDanoL(jogador.getArma().constDano);
@@ -2251,7 +2251,7 @@ class Menu {
                                                                 jogador.setDanoP(jogador.getArma().constDano);//dano
                                                                 orc.setHp(orc.getHp() - (jogador.getDanoP() - orc.getArmadura()));
                                                                 System.out.println(orc.getHp());
-                                                                System.out.println("Vida restante do slime: " + orc.getHp());
+                                                                System.out.println("Vida restante do orc: " + orc.getHp());
                                                                 System.out.println("Dano realizado: " + jogador.getDanoP());
                                                                 if (orc.getHp() >= 0) {
                                                                     System.out.println("Vc derrotou o orc!");
@@ -2406,10 +2406,10 @@ class Menu {
                                                         System.out.println("Vida restante do orc: " + orc.getHp());
                                                         System.out.println("Dano realizado: " + jogador.getDanoP());
                                                         if (orc.getHp() <= 0) {
-                                                            System.out.println("Vc derrotou o slime!");
+                                                            System.out.println("Vc derrotou o orc!");
                                                             break;
                                                         } else if (orc.getHp() > 0) {
-                                                            System.out.println("O slime aguentou o ataque!!");
+                                                            System.out.println("O orc aguentou o ataque!!");
                                                         }
                                                     } else if (jogador.getArma().categoria == "leve") {
                                                         jogador.setDanoL(jogador.getArma().constDano);
