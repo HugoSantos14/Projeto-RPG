@@ -151,7 +151,7 @@ class Menu {
             Inimigos slime = new Inimigos(5,6,10,10);//feito!
             Inimigos esqueleto = new Inimigos(6,4,10,10);//feito!
             Inimigos goblin = new Inimigos(6,7,10,12);//feito!
-            switch (d3.Lancar()) {
+            switch (d3.Lançar()) {
                 case 1://slime!
                     while (slime.getHp() > 0) {
                         jogador.setDefesa((int) (1.5 * jogador.getResistência() + jogador.getArmadura().getConstDefesa()));
