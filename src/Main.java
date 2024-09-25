@@ -19,10 +19,10 @@ public class Main {
             int selectedOption = input.nextInt();
             Console.clear();
             if (selectedOption == 1) {
-                Menu.CriarPersonagem();
-                Menu.História();
+                Menu.Historia();
+                Menu.HistoriaJogavel();
             } else if (selectedOption == 2) {
-                Menu.História();
+                Menu.Historia();
             } else if (selectedOption == 3) {
                 break;
             }
