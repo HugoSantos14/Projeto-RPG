@@ -49,3 +49,4 @@ public class Inimigos
     public void setHp() {
     }
 }
+
