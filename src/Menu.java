@@ -7,27 +7,27 @@ class Menu {
     static Dado d2 = new Dado(2);
     static Pocao pocao;
     static Dado d3 = new Dado(3);
-    static Scanner input = new Scanner(System.in);
+    int x;
 
-    public static void Historia() {
-        Console.clear();
+    public static void Historia()
+    {
         System.out.println("Você é um jovem aventureiro de uma pequena aldeia, famoso por sua coragem e sede de descobrir segredos antigos.");
-        System.out.println("Nos últimos meses, rumores sobre uma masmorra há muito esquecida, conhecida como A Masmorra de Eldorath, têm circulado pelas tavernas da região.\n");
-        Console.pause();
-        Console.clear();
-        System.out.println("Escondida nas profundezas das montanhas ao norte, Eldorath é dita guardar riquezas incalculáveis e poderes antigos,");
-        System.out.println("mas sua reputação é sombria: nenhum aventureiro que ousou entrar lá voltou para contar a história.");
+        System.out.println("Nos últimos meses, rumores sobre uma masmorra há muito esquecida, conhecida como A Masmorra de Eldorath, têm circulado pelas tavernas da região.");
+        System.out.println("Escondida nas profundezas das montanhas ao norte, Eldorath é dita guardar riquezas incalculáveis e poderes antigos, mas sua reputação é sombria: ");
+        System.out.println("nenhum aventureiro que ousou entrar lá voltou para contar a história.\n");
+
         System.out.println("Movido pela curiosidade, ambição e a promessa de glória, você decide partir em busca da masmorra lendária...\n");
-        Console.pause();
-        Console.clear();
-        System.out.println("Você se aproxima da entrada de Eldorath. As pedras da entrada estão cobertas de musgo e o ar, pesado e úmido, cheira a perigo e mistério.");
-        System.out.println("Uma sensação de perigo iminente paira no ar.\n");
-        Console.pause();
-        Console.clear();
+
+        System.out.println("Você se aproxima da entrada de Eldorath.");
+        System.out.println("As pedras da entrada estão cobertas de musgo e o ar, pesado e úmido, cheira a perigo e mistério.");
+        System.out.println("Uma sensação de perigo iminente paira no ar...\n");
     }
+
 
     public static void HistoriaJogavel()
     {
+        Scanner input = new Scanner(System.in);
+
         System.out.println("\t<<<Diga seu nome!>>>\n");
         System.out.print("Nome: ");
         Jogador jogador = new Jogador(input.nextLine(), 0, 0, 0, 0, 0);
@@ -137,7 +137,8 @@ class Menu {
             }
         }while(possuirArmadura = false);
         jogador.setHp(jogador.getResistência());
-        Menu.Historia();
+
+
         System.out.printf("\tBem-vindo %s a Eldorath!\n Sua aventura vai iniciar nesse momento!\n", jogador.nome);
         Console.clear();
         System.out.println("Bem vindo "+ jogador.nome +" ao primeiro andar da Dungeon");
@@ -259,8 +260,10 @@ class Menu {
                                         } else {System.out.println("Vida cheia!");}
                                         System.out.println("=================================");
                                         break;
+
                                 }
                             }
+                            Console.pause();
                             Console.clear();
                         } else if (jogador.getAgilidade() == slime.getAgilidade()) {
                             switch (d2.Lançar()) {
@@ -478,6 +481,7 @@ class Menu {
                                     }
 
                             }
+                            Console.pause();
                             Console.clear();
                         } else {
                             if(slime.getHp()>0) {
@@ -585,6 +589,7 @@ class Menu {
                                     System.out.println("Opção inválida! Tente novamente.");
 
                             }
+                            Console.pause();
                             Console.clear();
                         }
                     }
@@ -699,6 +704,7 @@ class Menu {
                                         break;
                                 }
                             }
+                            Console.pause();
                             Console.clear();
                         } else if (jogador.getAgilidade() == esqueleto.getAgilidade()) {
                             switch (d2.Lançar()) {
@@ -913,6 +919,7 @@ class Menu {
                                     }
 
                             }
+                            Console.pause();
                             Console.clear();
                         } else {
                             if(esqueleto.getHp()>0) {
@@ -1019,7 +1026,7 @@ class Menu {
                                 default:
                                     System.out.println("Opção inválida! Tente novamente.");
 
-                            }
+                            }Console.pause();
                             Console.clear();
                         }
                     }
@@ -1133,6 +1140,7 @@ class Menu {
                                         break;
                                 }
                             }
+                            Console.pause();
                             Console.clear();
                         } else if (jogador.getAgilidade() == goblin.getAgilidade()) {
                             switch (d2.Lançar()) {
@@ -1349,6 +1357,7 @@ class Menu {
                                     }
 
                             }
+                            Console.pause();
                             Console.clear();
                         } else {
                             if(goblin.getHp()>0) {
@@ -1456,6 +1465,7 @@ class Menu {
                                     System.out.println("Opção inválida! Tente novamente.");
 
                             }
+                            Console.pause();
                             Console.clear();
                         }
                     }//Recompensa:
@@ -1667,6 +1677,7 @@ class Menu {
                                                 break;
                                         }
                                     }
+                                    Console.pause();
                                     Console.clear();
                                 } else if (jogador.getAgilidade() == morcegoGigante.getAgilidade()) {
                                     switch (d2.Lançar()) {
@@ -1884,6 +1895,7 @@ class Menu {
                                             }
 
                                     }
+                                    Console.pause();
                                     Console.clear();
                                 } else {
                                     if (morcegoGigante.getHp()>0){
@@ -1991,6 +2003,7 @@ class Menu {
                                             System.out.println("Opção inválida! Tente novamente.");
 
                                     }
+                                    Console.pause();
                                     Console.clear();
                                 }
                             }
@@ -2104,6 +2117,7 @@ class Menu {
                                                         break;
                                                 }
                                             }
+                                            Console.pause();
                                             Console.clear();
                                         } else if (jogador.getAgilidade() == orc.getAgilidade()) {
                                             switch (d2.Lançar()) {
@@ -2323,6 +2337,7 @@ class Menu {
                                                     }
 
                                             }
+                                            Console.pause();
                                             Console.clear();
                                         } else {
                                             if(orc.getHp()>0) {
@@ -2430,6 +2445,7 @@ class Menu {
                                                     System.out.println("Opção inválida! Tente novamente.");
 
                                             }
+                                            Console.pause();
                                             Console.clear();
                                         }
                                     }
@@ -2636,6 +2652,7 @@ class Menu {
                             break;
                     }
                 }
+                Console.pause();
                 Console.clear();
             } else if (jogador.getAgilidade() == cavaleiroSagradoCorrompido.getAgilidade()) {
                 switch (d2.Lançar()) {
@@ -2853,6 +2870,7 @@ class Menu {
                         }
 
                 }
+                Console.pause();
                 Console.clear();
             } else {
                 if(cavaleiroSagradoCorrompido.getHp()>0) {
@@ -2959,10 +2977,10 @@ class Menu {
                         System.out.println("Opção inválida! Tente novamente.");
 
                 }
+                Console.pause();
                 Console.clear();
             }
         }
 
     }
 }
-
