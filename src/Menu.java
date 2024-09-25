@@ -7,12 +7,27 @@ class Menu {
     static Dado d2 = new Dado(2);
     static Pocao pocao;
     static Dado d3 = new Dado(3);
+    static Scanner input = new Scanner(System.in);
 
+    public static void Historia() {
+        Console.clear();
+        System.out.println("Você é um jovem aventureiro de uma pequena aldeia, famoso por sua coragem e sede de descobrir segredos antigos.");
+        System.out.println("Nos últimos meses, rumores sobre uma masmorra há muito esquecida, conhecida como A Masmorra de Eldorath, têm circulado pelas tavernas da região.\n");
+        Console.pause();
+        Console.clear();
+        System.out.println("Escondida nas profundezas das montanhas ao norte, Eldorath é dita guardar riquezas incalculáveis e poderes antigos,");
+        System.out.println("mas sua reputação é sombria: nenhum aventureiro que ousou entrar lá voltou para contar a história.");
+        System.out.println("Movido pela curiosidade, ambição e a promessa de glória, você decide partir em busca da masmorra lendária...\n");
+        Console.pause();
+        Console.clear();
+        System.out.println("Você se aproxima da entrada de Eldorath. As pedras da entrada estão cobertas de musgo e o ar, pesado e úmido, cheira a perigo e mistério.");
+        System.out.println("Uma sensação de perigo iminente paira no ar.\n");
+        Console.pause();
+        Console.clear();
+    }
 
     public static void HistoriaJogavel()
     {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("\t<<<Diga seu nome!>>>\n");
         System.out.print("Nome: ");
         Jogador jogador = new Jogador(input.nextLine(), 0, 0, 0, 0, 0);
@@ -122,6 +137,7 @@ class Menu {
             }
         }while(possuirArmadura = false);
         jogador.setHp(jogador.getResistência());
+        Menu.Historia();
         System.out.printf("\tBem-vindo %s a Eldorath!\n Sua aventura vai iniciar nesse momento!\n", jogador.nome);
         Console.clear();
         System.out.println("Bem vindo "+ jogador.nome +" ao primeiro andar da Dungeon");
