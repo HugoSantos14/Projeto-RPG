@@ -985,7 +985,7 @@ class Menu {
                                         jogador.setDanoP(jogador.getArma().constDano);//dano
                                         esqueleto.setHp(esqueleto.getHp() - (jogador.getDanoP() - esqueleto.getArmadura()));
                                         System.out.println(esqueleto.getHp());
-                                        System.out.println("Vida restante do slime: " + esqueleto.getHp());
+                                        System.out.println("Vida restante do esqueleto: " + esqueleto.getHp());
                                         System.out.println("Dano realizado: " + jogador.getDanoP());
                                         if (esqueleto.getHp() <= 0) {
                                             System.out.println("Vc derrotou o esqueleto!");
@@ -2981,6 +2981,15 @@ class Menu {
                 Console.clear();
             }
         }
-
+        System.out.println("***************************************************");
+        System.out.println("*                                                 *");
+        System.out.println("*           PARABÉNS, " + jogador.nome + "! VOCÊ VENCEU!                *");
+        System.out.println("*                                                 *");
+        System.out.println("*    Você demonstrou coragem e habilidade!        *");
+        System.out.println("*    A aventura foi desafiadora, mas você saiu    *");
+        System.out.println("*    vitorioso e alcançou a glória eterna!        *");
+        System.out.println("*                                                 *");
+        System.out.println("***************************************************");
+        System.out.println("           Obrigado por jogar! Até a próxima!");
     }
 }
