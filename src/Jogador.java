@@ -2,6 +2,7 @@ class Jogador {
     Dado d6 = new Dado(6);
     Dado d4 = new Dado (4);
     Dado d12 = new Dado (12);
+    public int cura;
     public int MaxHp;
     public String nome;
     public int hp = 0;
@@ -16,6 +17,10 @@ class Jogador {
     private int destreza = 0;
     private int inteligência = 0;
     private Armadura armadura;
+
+    public void setCura(int cura) {
+        this.hp = cura;
+    }
 
     public int getDefesa() {
         return defesa;
