@@ -119,7 +119,7 @@ class MetodosPrincipais {
         do {
             System.out.println("\t<<<Escolha de arma>>>\n");
             System.out.println("Nome: " + jogador.getNome());
-            System.out.printf("\n1 - %s-->Escala com %s\n2 - %s-->Escala com %s\n3 - %s-->Escala com %s\n> ", arma1.getNome(), arma1.getCategoria(), arma2.getNome(), arma2.getCategoria(), arma2.getCategoria(), arma3.getNome(), arma3.getCategoria());
+            System.out.printf("\n1 - %s-->Escala com %s\n2 - %s-->Escala com %s\n3 - %s-->Escala com %s\n> ", arma1.getNome(), arma1.getCategoria(), arma2.getNome(), arma2.getCategoria(), arma3.getNome(), arma3.getCategoria());
             switch (input.nextInt()) {
                 case 1:
                     jogador.setArma(arma1);
