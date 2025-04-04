@@ -1,19 +1,19 @@
 package model.entities;
 
-import java.util.Objects;
+import datastructures.LinkedList;
 
-public class Player {
+public final class Player {
 
     private int id;
     private String username;
     private String password;
-    private int runes;
-
-    private Character character;
+    private int runes; // Moeda do jogo (runas)
+    private final LinkedList<Character> characters;
 
     public Player(String username, String password) {
         this.username = username;
         this.password = password;
+        this.characters = new LinkedList<>();
     }
 
     public int getId() {
@@ -48,23 +48,7 @@ public class Player {
         this.runes = runes;
     }
 
-    public Character getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return Objects.equals(username, player.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(username);
+    public LinkedList<Character> getCharacters() {
+        return characters;
     }
 }
