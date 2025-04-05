@@ -7,7 +7,7 @@ public final class Player {
     private int id;
     private String username;
     private String password;
-    private int runes; // Moeda do jogo (runas)
+    private int runes; // Moeda do jogo (runas)!
     private final LinkedList<Character> characters;
 
     public Player(String username, String password) {
