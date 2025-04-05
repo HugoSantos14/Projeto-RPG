@@ -64,17 +64,17 @@ public class Queue<E> {
             if (head.getNext() != null) {
                 result.append(", ");
             }
-            temp.add(remove());
+            temp.enqueue(dequeue());
         }
 
         while (!temp.isEmpty()) {
-            add(temp.remove());
+            enqueue(temp.dequeue());
         }
 
         return result.toString();
     }
 
-    public void add(E data) {
+    public void enqueue(E data) {
         if (isFull()) {
             throw new IndexOutOfBoundsException("Fila cheia");
         }
@@ -90,7 +90,7 @@ public class Queue<E> {
         size++;
     }
 
-    public E remove() {
+    public E dequeue() {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("Fila vazia");
         }
