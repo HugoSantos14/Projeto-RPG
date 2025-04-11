@@ -2,6 +2,7 @@ package model.entities;
 
 public abstract class Entity {
 
+    private int agility;
     private String name;
     private int level;
     private int hp;
@@ -11,6 +12,20 @@ public abstract class Entity {
     public Entity(String name) {
         this.name = name;
         estusFlasks = 3;
+    }
+
+    public Entity(String name, Integer maxHp) {
+        this.maxHp = maxHp;
+        this.name = name;
+        estusFlasks = 3;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
     public String getName() {

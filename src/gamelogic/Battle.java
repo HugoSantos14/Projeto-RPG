@@ -1,5 +1,6 @@
 package gamelogic;
 
+import model.entities.Character;
 import model.entities.Entity;
 import model.entities.Monster;
 import model.entities.Player;
@@ -10,9 +11,18 @@ import java.util.Scanner;
 public class Battle {
     private static final Scanner input = new Scanner(System.in);
 
-    public void PlayerTurn(Player p1, Entity p2){
+    public boolean PlayerisFaster(Character p1, Entity p2) {
+        if (p1.getAgility() > p2.getAgility()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void PlayerTurn(Character p1, Monster p2){
+
         System.out.println("==============================");
-        System.out.println("       TURN OF " + p1.getUsername());
+        System.out.println("       TURN OF " + p1.getName());
         System.out.println("==============================\n");
         //to string player
         //to string enemy
@@ -20,7 +30,7 @@ public class Battle {
 
         System.out.println("Escolha uma ação:");
         System.out.println("1. Atacar");
-        System.out.println("2. Defender");
+        System.out.println("2. Usar Skill");
         System.out.println("3. Usar poção");
         System.out.print("Opção: ");
 
@@ -28,6 +38,13 @@ public class Battle {
 
         switch(opcao){
             case "1":
+                if (p2.getDefense() > p1.Attack()){
+                    System.out.println("Perfect defense! No damage to " + p2.getName());
+                } else {
+                    System.out.println("Damage to " + p2.getName()  + "is " + p1.Attack());
+                    p2.setHp(p1.Attack() - p2.getDefense() + p2.getHp());
+                    System.out.println("Actual Hp to "+ p2.getName() + "is " + p2.getHp());
+                }
                 break;
             case "2":
                 break;
