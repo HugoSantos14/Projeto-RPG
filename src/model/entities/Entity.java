@@ -2,11 +2,11 @@ package model.entities;
 
 public abstract class Entity {
 
-    private int agility;
     private String name;
     private int level;
     private int hp;
     private int maxHp;
+    private int agility;
     private int estusFlasks; // Frascos de cura!
 
     public Entity(String name) {

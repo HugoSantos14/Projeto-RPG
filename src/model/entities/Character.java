@@ -9,12 +9,13 @@ import java.util.Random;
 
 public class Character extends Entity {
 
-    private Integer dexterity;
-    private Integer strenght;
-    private Weapon weapon;
-    private Armor armor;
     private int id;
     private final LinkedList<Item> inventory;
+
+    private int strength;
+    private int dexterity;
+    private Weapon weapon;
+    private Armor armor;
 
     public Character(String name, LinkedList<Item> inventory, int id, Armor armor, Weapon weapon) {
         super(name);
@@ -24,32 +25,31 @@ public class Character extends Entity {
         this.weapon = weapon;
     }
 
-    public int Attack(){
-        if (getWeapon().isWeaponHeavy()){
+    public int attack() {
+        Random dice = new Random();
+        if (weapon.isHeavy()) {
             // ataque por força 2 d6
-            Random dice = new Random();
-            return (dice.nextInt(6) + 2 + dice.nextInt(6) + getStrenght() + getWeapon().getContsDamage());
+            return (dice.nextInt(6) + 2 + dice.nextInt(6) + getStrength() + getWeapon().getBaseDamage());
         } else {
             // ataque por destreza 3 d4
-            Random dice = new Random();
-            return dice.nextInt(4) + 3 + dice.nextInt(4) + dice.nextInt(4) + getDexterity() + getWeapon().getContsDamage();
+            return dice.nextInt(4) + 3 + dice.nextInt(4) + dice.nextInt(4) + getDexterity() + getWeapon().getBaseDamage();
         }
     }
 
-    public Integer getDexterity() {
+    public int getDexterity() {
         return dexterity;
     }
 
-    public void setDexterity(Integer dexterity) {
+    public void setDexterity(int dexterity) {
         this.dexterity = dexterity;
     }
 
-    public Integer getStrenght() {
-        return strenght;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setStrenght(Integer strenght) {
-        this.strenght = strenght;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public Weapon getWeapon() {

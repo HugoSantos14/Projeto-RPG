@@ -11,12 +11,8 @@ import java.util.Scanner;
 public class Battle {
     private static final Scanner input = new Scanner(System.in);
 
-    public boolean PlayerisFaster(Character p1, Entity p2) {
-        if (p1.getAgility() > p2.getAgility()) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean playerisFaster(Character player, Entity enemy) {
+        return player.getAgility() > enemy.getAgility();
     }
 
     public void PlayerTurn(Character p1, Monster p2){
@@ -38,17 +34,15 @@ public class Battle {
 
         switch(opcao){
             case "1":
-                if (p2.getDefense() > p1.Attack()){
+                if (p2.getDefense() > p1.attack()){
                     System.out.println("Perfect defense! No damage to " + p2.getName());
                 } else {
-                    System.out.println("Damage to " + p2.getName()  + "is " + p1.Attack());
-                    p2.setHp(p1.Attack() - p2.getDefense() + p2.getHp());
+                    System.out.println("Damage to " + p2.getName()  + "is " + p1.attack());
+                    p2.setHp(p1.attack() - p2.getDefense() + p2.getHp());
                     System.out.println("Actual Hp to "+ p2.getName() + "is " + p2.getHp());
                 }
                 break;
-            case "2":
-                break;
-            case "3":
+            case "2", "3":
                 break;
             default:
                 System.out.println("Turno perdido por sua indecisão!");
@@ -56,15 +50,15 @@ public class Battle {
         }
     }
 
-    public void EnemyTurn(Player p1, Monster m){
+    public void EnemyTurn(Player p1, Monster m) {
         Random rand = new Random();
         System.out.println("==============================");
         System.out.println("       TURN OF MONSTER");
         System.out.println("==============================\n");
 
-        switch(rand.nextInt(3)+ 1){
+        switch (rand.nextInt(3) + 1) {
             case 1:
-                //Attack
+                //attack
                 break;
             case 2:
                 //skill

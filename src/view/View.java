@@ -21,11 +21,12 @@ public class View {
             switch (sc.nextInt()) {
                 case 1:
                     login();
-                    return;
+                    break;
                 case 2:
                     signup();
-                    return;
+                    break;
                 case 3:
+                    sc.close();
                     return;
             }
         }
@@ -41,14 +42,16 @@ public class View {
             String password = sc.nextLine();
             Player player = new Player(username, password);
 
-            if (ps.authenticate(player)) {
-                System.out.println("Você entrou como " + ps.getById(player.getId()).getUsername());
+            Player authenticatedPlayer = ps.authenticate(player);
+
+            if (authenticatedPlayer != null) {
+                System.out.println("Você entrou como " + authenticatedPlayer.getUsername());
                 break;
             } else {
                 System.err.println("Usuário ou senha incorretos.");
-                System.err.println("Deseja voltar à tela inicial? (S/N)");
-                if (sc.nextLine().toUpperCase().equals("S")) {
-                    run();
+                System.err.println("Deseja criar uma nova conta? (S/N)");
+                if (sc.nextLine().equalsIgnoreCase("S")) {
+                    signup();
                     break;
                 }
             }

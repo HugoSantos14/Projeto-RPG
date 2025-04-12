@@ -1,16 +1,15 @@
 package model.game;
 
 public class Weapon {
+
     private String name;
-    private int contsDamage;
-    private boolean weaponHeavy;
+    private int baseDamage;
+    private boolean heavy;
 
-    public boolean isWeaponHeavy() {
-        return weaponHeavy;
-    }
-
-    public void setWeaponHeavy(boolean weaponHeavy) {
-        this.weaponHeavy = weaponHeavy;
+    public Weapon(String name, int baseDamage, boolean heavy) {
+        this.name = name;
+        this.baseDamage = baseDamage;
+        this.heavy = heavy;
     }
 
     public String getName() {
@@ -21,24 +20,24 @@ public class Weapon {
         this.name = name;
     }
 
-    public int getContsDamage() {
-        return contsDamage;
+    public int getBaseDamage() {
+        return baseDamage;
     }
 
-    public void setContsDamage(int contsDamage) {
-        this.contsDamage = contsDamage;
+    public void setBaseDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
     }
 
-    public Weapon(String name, int contsDamage, boolean weaponheavy) {
-        this.name = name;
-        this.contsDamage = contsDamage;
-        this.weaponHeavy = weaponheavy;
+    public boolean isHeavy() {
+        return heavy;
     }
 
-    public String printHeavy()
-    {
-        if (isWeaponHeavy())
-        {
+    public void setHeavy(boolean heavy) {
+        this.heavy = heavy;
+    }
+
+    public String printHeavy() {
+        if (isHeavy()) {
             return "A arma escala com força!";
         } else {
             return "A arma escala com destreza!";

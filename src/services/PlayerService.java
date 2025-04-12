@@ -8,7 +8,6 @@ import java.util.*;
 public class PlayerService implements Repository<Player> {
 
     private static final Map<Integer, Player> players = new HashMap<>();
-    private static final Scanner sc = new Scanner(System.in);
     private static int idCounter = 1;
 
     @Override
@@ -34,15 +33,20 @@ public class PlayerService implements Repository<Player> {
 
     @Override
     public boolean contains(Player player) {
-        return players.containsKey(player.getId());
-    }
-
-    public boolean authenticate(Player player) {
         for (Player p : players.values()) {
-            if (player.getUsername().equals(p.getUsername()) && player.getPassword().equals(p.getPassword())) {
+            if (player.getUsername().equals(p.getUsername())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Player authenticate(Player player) {
+        for (Player p : players.values()) {
+            if (player.getUsername().equals(p.getUsername()) && player.getPassword().equals(p.getPassword())) {
+                return p;
+            }
+        }
+        return null;
     }
 }
