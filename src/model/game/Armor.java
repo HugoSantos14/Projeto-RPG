@@ -1,23 +1,31 @@
 package model.game;
 
-public class Armor {
+public class Armor extends Item {
+
     private String name;
-    private int contsDefense;
+    private int baseDefense;
     private int constForUse;
+
+    public Armor(String name, int baseDefense, int constForUse) {
+        this.name = name;
+        this.baseDefense = baseDefense;
+        this.constForUse = constForUse;
+    }
 
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getContsDefense() {
-        return contsDefense;
+    public int getBaseDefense() {
+        return baseDefense;
     }
 
-    public void setContsDefense(int contsDefense) {
-        this.contsDefense = contsDefense;
+    public void setBaseDefense(int baseDefense) {
+        this.baseDefense = baseDefense;
     }
 
     public int getConstForUse() {
@@ -25,12 +33,6 @@ public class Armor {
     }
 
     public void setConstForUse(int constForUse) {
-        this.constForUse = constForUse;
-    }
-
-    public Armor(String name, int contsDefense, int constForUse) {
-        this.name = name;
-        this.contsDefense = contsDefense;
         this.constForUse = constForUse;
     }
 }

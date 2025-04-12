@@ -2,9 +2,11 @@ package services;
 
 import model.entities.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-// Cadastro de jogadores
+// CADASTRO DE JOGADORES
 public class PlayerService implements Repository<Player> {
 
     private static final Map<Integer, Player> players = new HashMap<>();
@@ -27,7 +29,7 @@ public class PlayerService implements Repository<Player> {
     }
 
     @Override
-    public List<Player> getAll() {
+    public ArrayList<Player> getAll() {
         return new ArrayList<>(players.values());
     }
 

@@ -1,41 +1,40 @@
 package services;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.entities.Character;
 
+// CADASTRO DE PERSONAGENS
 public class CharacterService implements Repository<Character> {
 
-   private static ArrayList<Character> lista = new ArrayList<>();
-   private static int idCounter = 0;
+    private static final Map<Integer, Character> characters = new HashMap<>();
+    private static int idCounter = 1;
 
     @Override
-    public void create(Character e) {
-      e.setId(idCounter++);
-      lista.add(e);
+    public void create(Character character) {
+        character.setId(idCounter++);
+        characters.put(character.getId(), character);
     }
 
     @Override
     public void delete(int id) {
-        lista.remove(id);
+        characters.remove(id);
     }
 
     @Override
     public Character getById(int id) {
-        return lista.get(id);
+        return characters.get(id);
     }
 
     @Override
     public ArrayList<Character> getAll() {
-       return lista;
+        return new ArrayList<>(characters.values());
     }
 
     @Override
-    public boolean contains(Character e) {
-        return lista.contains(e);
+    public boolean contains(Character character) {
+        return characters.containsKey(character.getId());
     }
-
-
-
 }

@@ -1,17 +1,16 @@
-package datastructures;
+package utils.datastructures;
 
-public class Queue<E> {
+public class Stack<E> {
 
     private Node<E> head;
-    private Node<E> tail;
     private int size;
     private final int capacity;
 
-    public Queue() {
+    public Stack() {
         this.capacity = Integer.MAX_VALUE;
     }
 
-    public Queue(int capacity) {
+    public Stack(int capacity) {
         this.capacity = capacity;
     }
 
@@ -21,14 +20,6 @@ public class Queue<E> {
 
     public void setHead(Node<E> head) {
         this.head = head;
-    }
-
-    public Node<E> getTail() {
-        return tail;
-    }
-
-    public void setTail(Node<E> tail) {
-        this.tail = tail;
     }
 
     public int size() {
@@ -54,56 +45,47 @@ public class Queue<E> {
     @Override
     public String toString() {
         if (isEmpty()) {
-            return "Fila vazia";
+            return "Pilha vazia";
         }
 
         StringBuilder result = new StringBuilder();
-        Queue<E> temp = new Queue<>(capacity);
+        Stack<E> temp = new Stack<>(capacity);
         while (!isEmpty()) {
             result.append(peek());
             if (head.getNext() != null) {
-                result.append(", ");
+                result.append("\n");
             }
-            temp.enqueue(dequeue());
+            temp.push(pop());
         }
 
         while (!temp.isEmpty()) {
-            enqueue(temp.dequeue());
+            push(temp.pop());
         }
 
         return result.toString();
     }
 
-    public void enqueue(E data) {
+    public void push(E data) {
         if (isFull()) {
-            throw new IndexOutOfBoundsException("Fila cheia");
+            throw new IndexOutOfBoundsException("Pilha cheia");
         }
 
         final Node<E> newNode = new Node<>(data);
-        if (isEmpty()) {
-            head = newNode;
-        } else {
-            tail.setNext(newNode);
-            newNode.setPrev(tail);
-        }
-        tail = newNode;
+        newNode.setNext(head);
+        head = newNode;
         size++;
     }
 
-    public E dequeue() {
+    public E pop() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Fila vazia");
+            throw new IndexOutOfBoundsException("Pilha vazia");
         }
 
-        final E removedData = head.getData();
+        final Node<E> removedNode = head;
         head = head.getNext();
+        removedNode.setNext(null);
         size--;
-
-        if (isEmpty()) {
-            tail = null;
-        }
-
-        return removedData;
+        return removedNode.getData();
     }
 
     public E peek() {

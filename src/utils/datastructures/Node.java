@@ -1,4 +1,4 @@
-package datastructures;
+package utils.datastructures;
 
 public final class Node<E> {
 

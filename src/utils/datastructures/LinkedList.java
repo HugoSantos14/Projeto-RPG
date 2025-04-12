@@ -1,4 +1,4 @@
-package datastructures;
+package utils.datastructures;
 
 public class LinkedList<E> {
 

@@ -1,6 +1,6 @@
 package model.entities;
 
-import datastructures.LinkedList;
+import utils.datastructures.LinkedList;
 import model.game.Armor;
 import model.game.Item;
 import model.game.Weapon;
