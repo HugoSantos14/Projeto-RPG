@@ -1,6 +1,9 @@
 package utils.datastructures;
 
-public class LinkedList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<E> implements Iterable<E> {
 
     private Node<E> head;
     private Node<E> tail;
@@ -45,11 +48,9 @@ public class LinkedList<E> {
 
         StringBuilder result = new StringBuilder();
         Node<E> current = head;
+        int counter = 1;
         while (current != null) {
-            result.append(current.getData());
-            if (current.getNext() != null) {
-                result.append(", ");
-            }
+            result.append(counter++).append(" - ").append(current);
             current = current.getNext();
         }
         
@@ -83,31 +84,33 @@ public class LinkedList<E> {
     }
 
     public void add(E data, int index) {
-        if (index == 0) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+        } else if (index == 0) {
             addFirst(data);
-        } else {
-            Node<E> current = head;
-            int count = 0;
-            
-            while (current != null && count < index) {
-                current = current.getNext();
-                count++;
-            }
-            
-            if (current == null) {
-                add(data);
-            } else {
-                final Node<E> newNode = new Node<>(data);
-                newNode.setNext(current);
-                newNode.setPrev(current.getPrev());
-                current.getPrev().setNext(newNode);
-                current.setPrev(newNode);
-                size++;
-            }
+            return;
+        } else if (index == size - 1) {
+            add(data);
+            return;
         }
+
+        Node<E> current = head;
+        int count = 0;
+        while (current != null && count < index) {
+            current = current.getNext();
+            count++;
+        }
+
+        assert current != null;
+        final Node<E> newNode = new Node<>(data);
+        newNode.setNext(current);
+        newNode.setPrev(current.getPrev());
+        current.getPrev().setNext(newNode);
+        current.setPrev(newNode);
+        size++;
     }
 
-    public void deleteFirst() {
+    public void removeFirst() {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("Lista vazia");
         }
@@ -124,7 +127,7 @@ public class LinkedList<E> {
         size--;
     }
 
-    public void deleteLast() {
+    public void removeLast() {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("Lista vazia");
         }
@@ -141,46 +144,77 @@ public class LinkedList<E> {
         size--;
     }
 
-    public void delete(int index) {
+    public void remove(int index) {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("Lista vazia");
+        } else if (index > size - 1 || index < 0) {
+            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+        } else if (index == 0) {
+            removeFirst();
+            return;
+        } else if (index == size - 1) {
+            removeLast();
+            return;
         }
-
-        if (index == 0) {
-            deleteFirst();
-        } else {
-            Node<E> current = head;
-            int count = 0;
-    
-            while (current != null && count < index) {
-                current = current.getNext();
-                count++;
-            }
-    
-            if (current == null) {
-                throw new IndexOutOfBoundsException("Posição errada");
-            } else if (current == tail) {
-                deleteLast();
-            } else {
-                current.getPrev().setNext(current.getNext());
-                current.getNext().setPrev(current.getPrev());
-                current.setPrev(null);
-                current.setNext(null);
-                size--;
-            }
-        }
-    }
-
-    public E get(int index){
 
         Node<E> current = head;
         int count = 0;
-
-        while(current !=  null) {
-            if(index == ){}
+        while (current != null && count < index) {
             current = current.getNext();
+            count++;
         }
 
+        assert current != null;
+        current.getPrev().setNext(current.getNext());
+        current.getNext().setPrev(current.getPrev());
+        current.setPrev(null);
+        current.setNext(null);
+        size--;
+    }
 
+    public E get(int index) {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Lista vazia");
+        } else if (index > size - 1 || index < 0 ) {
+            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+        } else if (index == 0) {
+            return head.getData();
+        } else if (index == size - 1) {
+            return tail.getData();
+        }
+
+        Node<E> current = head;
+        int count = 0;
+        while (current != null && count < index) {
+            current = current.getNext();
+            count++;
+        }
+
+        assert current != null;
+        return current.getData();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<E> {
+        private Node<E> current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            final E data = current.getData();
+            current = current.getNext();
+            return data;
+        }
     }
 }

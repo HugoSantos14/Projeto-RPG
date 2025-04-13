@@ -1,10 +1,10 @@
 package model.game;
 
+import model.entities.Monster;
+import utils.datastructures.LinkedList;
 import utils.datastructures.Queue;
 import utils.datastructures.Stack;
 import model.entities.Entity;
-
-import java.util.ArrayList;
 
 public class Battle {
 
@@ -12,12 +12,18 @@ public class Battle {
     private int turnCounter;
     private boolean running;
 
-    private final ArrayList<Entity> participants; // Lista de participantes da luta!
     private final Queue<Entity> turns = new Queue<>();
     private final Stack<Entity> ranking = new Stack<>();
 
-    public Battle(ArrayList<Entity> participants) {
-        this.participants = participants;
+    public Battle() {
+        LinkedList<Entity> participants = new LinkedList<>();
+        for (int i = 0; i < 3; i++) {
+            participants.add(new Monster(String.valueOf(i+1)));
+        }
+
+        for (Entity e : participants) {
+
+        }
     }
 
     public int getId() {
@@ -26,10 +32,6 @@ public class Battle {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ArrayList<Entity> getParticipants() {
-        return participants;
     }
 
     public int getTurnCounter() {

@@ -88,9 +88,7 @@ public class Character extends Entity {
         this.id = id;
     }
 
-    public LinkedList<Item> getInventory() {
-        return inventory;
-    }
+
 
     public void levelUp() {
         setLevel(getLevel() + 1);

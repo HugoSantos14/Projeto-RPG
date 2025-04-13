@@ -18,6 +18,10 @@ public class View {
     private static final PlayerService ps = new PlayerService();
     private static final CharacterService cs = new CharacterService();
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void run() {
         while (true) {
             System.out.println("\n===== INÍCIO =====");

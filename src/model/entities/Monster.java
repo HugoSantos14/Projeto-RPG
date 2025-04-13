@@ -4,6 +4,10 @@ public class Monster extends Entity {
     private Integer damage;
     private Integer defense;
 
+    public Monster(String name) {
+        super(name);
+    }
+
     public Monster(String name, Integer damage, Integer defense, Integer MaxHp) {
         super(name, MaxHp);
         this.damage = damage;
