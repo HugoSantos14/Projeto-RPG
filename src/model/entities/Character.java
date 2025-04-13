@@ -25,6 +25,10 @@ public class Character extends Entity {
         this.weapon = weapon;
     }
 
+    public Character(String name, Integer maxHp) {
+        super(name, maxHp);
+    }
+
     public int attack() {
         Random dice = new Random();
         if (weapon.isHeavy()) {

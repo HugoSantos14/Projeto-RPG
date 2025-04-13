@@ -9,6 +9,7 @@ import services.PlayerService;
 import utils.InputReader;
 
 import java.util.Random;
+import java.util.Scanner;
 
 // TELAS DO JOGO
 public class View {
@@ -102,7 +103,23 @@ public class View {
                     // Batalha
                     break;
                 case 2:
+                    Console console = new Console();
+                    console.clear();
+                    System.out.println("|======================================|");
+                    System.out.printf ("| Name: %-30s |\n", player.getCharacterName());
+                    System.out.println("|======================================|");
+                    System.out.printf ("| Hp: %-32d |\n", player.getHp());
+                    System.out.printf ("| Strength: %-26d |\n", player.getStrength());
+                    System.out.printf ("| Dexterity: %-25d |\n", player.getDexterity());
+                    System.out.printf ("| Agility: %-27d |\n", player.getAgility());
+                    System.out.printf ("| Defense: %-27d |\n", player.getArmor().getContsDefense());
+                    System.out.println("|--------------------------------------|");
+                    System.out.printf ("| Weapon: %-28s |\n", player.getWeapon().getName());
+                    System.out.printf ("| Armor: %-29s |\n", player.getArmor().getName());
+                    System.out.println("|======================================|");
 
+                    console.pause();
+                    console.clear();
                     break;
                 case 3:
                     System.out.println("Deseja sair da conta? (S/N)");
@@ -116,11 +133,83 @@ public class View {
     }
 
     public void characterCreation() {
+        Scanner input = new Scanner(System.in);
+
+        while (rewardpoints > 0) {
+            System.out.println("\n==============================");
+            System.out.println("    DISTRIBUIÇÃO DE ATRIBUTOS    ");
+            System.out.println("==============================");
+            System.out.printf("Pontos restantes: %d\n", rewardpoints);
+            System.out.println("\nAtributos:");
+            System.out.printf("1. Strenght      : %d\n", player.getStrength());
+            System.out.printf("2. Dexterity     : %d\n", player.getDexterity());
+            System.out.printf("3. Agilidade     : %d\n", player.getAgility());
+            //System.out.printf("4. Inteligência  : %d\n", inteligencia);
+            System.out.println("------------------------------");
+            int escolha = input.nextInt();
+            switch (escolha) {
+                case 1:
+                    player.setStrength(player.getStrength() + 1);
+                    rewardpoints--;
+                    break;
+                case 2:
+                    player.setDexterity(player.getDexterity() + 1);
+                    rewardpoints--;
+                    break;
+                case 3:
+                    player.setAgility(player.getAgility() + 1);
+                    rewardpoints--;
+                default:
+                    System.out.println("Não Existe esse atributo!");
+                    break;
+            }
+        }
 
     }
 
     public void battleScreen(Battle battle) {
 
+    }
+
+    public void setArmorOnPlayer(Player player, Armor armor, Armor armor2, Armor armor3)
+    {
+        Scanner input = new Scanner(System.in);
+
+        while (player.getArmor() == null) {
+            System.out.println("Escolha sua Armadura de aventureiro:");
+            System.out.println("1 - " + armor.getName() + ", agilidade para uso "  + armor.getConstForUse());
+            System.out.println("2 - " + armor2.getName()+ ", agilidade para uso " + armor2.getConstForUse());
+            System.out.println("3 - " + armor3.getName()+ ", agilidade para uso " + armor3.getConstForUse());
+            System.out.print("Digite o número correspondente à sua escolha: ");
+            int choice = input.nextInt();
+
+            switch (choice) {
+                case 1:
+                    if(player.getAgility() >= armor.getConstForUse()) {
+                        player.setArmor(armor);
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor.getConstForUse() + " para uso!");
+                    }
+                    break;
+                case 2:
+                    if(player.getAgility() >= armor2.getConstForUse()) {
+                        player.setArmor(armor2);
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor2.getConstForUse() + " para uso!");
+                    }
+                    break;
+                case 3:
+                    if(player.getAgility() >= armor3.getConstForUse()) {
+                        player.setArmor(armor3);
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor3.getConstForUse() + " para uso!");
+                    }
+                    break;
+                default:
+                    System.out.println("Isso não é armadura, por favor digite novamente!");
+                    break;
+            }
+        }
     }
 
     private void PlayerTurn(Character p1, Monster p2) {
@@ -156,6 +245,44 @@ public class View {
                 System.out.println("Turno perdido por sua indecisão!");
                 break;
         }
+    }
+
+    public void setWeaponOnPlayer(Player player, Weapon weapon, Weapon weapon2, Weapon weapon3)
+    {
+        Scanner input = new Scanner(System.in);
+
+        while (player.getWeapon() == null) {
+            System.out.println("Escolha sua arma de aventureiro:");
+            System.out.println("1 - " + weapon.getName() + ", " + weapon.printHeavy());
+            System.out.println("2 - " + weapon2.getName() + ", " + weapon2.printHeavy());
+            System.out.println("3 - " + weapon3.getName() + ", " + weapon3.printHeavy());
+            System.out.print("Digite o número correspondente à sua escolha: ");
+            int choice = input.nextInt();
+
+            switch (choice) {
+                case 1:
+                    player.setWeapon(weapon);
+                    break;
+                case 2:
+                    player.setWeapon(weapon2);
+                    break;
+                case 3:
+                    player.setWeapon(weapon3);
+                    break;
+                default:
+                    System.out.println("Isso não é arma, por favor digite novamente!");
+                    break;
+            }
+        }
+    }
+
+    public void ResetAfterBattle(Player player)
+    {
+        player.setHp(player.getMaxhp());
+        player.setOnGuard(false);
+        player.setPotions(3);
+        //Adicionar o reset do dano base da arma apos uso da skill
+        //Adicionar o reset de defesa base da armadura apos o uso da skill
     }
 
     private void EnemyTurn(Player p1, Monster m) {
