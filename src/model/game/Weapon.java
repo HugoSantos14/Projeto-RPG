@@ -5,11 +5,33 @@ public class Weapon extends Item {
     private String name;
     private int baseDamage;
     private boolean heavy;
+    private int maxDamage;
 
     public Weapon(String name, int baseDamage, boolean heavy) {
         this.name = name;
         this.baseDamage = baseDamage;
         this.heavy = heavy;
+        this.maxDamage = baseDamage;
+    }
+
+    public String printHeavy() {
+        if (isHeavy()) {
+            return "A arma escala com força!";
+        } else {
+            return "A arma escala com destreza!";
+        }
+    }
+
+    public int resetDamage(){
+        return baseDamage;
+    }
+
+    public int getMaxDamage() {
+        return maxDamage;
+    }
+
+    public void setMaxDamage(int maxDamage) {
+        this.maxDamage = maxDamage;
     }
 
     public String getName() {
@@ -36,11 +58,4 @@ public class Weapon extends Item {
         this.heavy = heavy;
     }
 
-    public String printHeavy() {
-        if (isHeavy()) {
-            return "A arma escala com força!";
-        } else {
-            return "A arma escala com destreza!";
-        }
-    }
 }

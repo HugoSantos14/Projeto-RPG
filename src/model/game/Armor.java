@@ -4,12 +4,26 @@ public class Armor extends Item {
 
     private String name;
     private int baseDefense;
+    private int maxDefense;
     private int constForUse;
 
     public Armor(String name, int baseDefense, int constForUse) {
         this.name = name;
         this.baseDefense = baseDefense;
         this.constForUse = constForUse;
+        this.maxDefense = baseDefense;
+    }
+
+    public int resetDefense(){
+        return baseDefense;
+    }
+
+    public int getMaxDefense() {
+        return maxDefense;
+    }
+
+    public void setMaxDefense(int maxDefense) {
+        this.maxDefense = maxDefense;
     }
 
     public String getName() {
