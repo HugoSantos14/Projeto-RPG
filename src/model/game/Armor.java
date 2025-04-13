@@ -1,6 +1,6 @@
 package model.game;
 
-public class Armor extends Item {
+public class Armor {
 
     private String name;
     private int baseDefense;

@@ -1,6 +1,6 @@
 package model.game;
 
-public class Weapon extends Item {
+public class Weapon {
 
     private String name;
     private int baseDamage;

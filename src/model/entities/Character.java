@@ -3,7 +3,6 @@ package model.entities;
 import model.game.Skill;
 import utils.datastructures.LinkedList;
 import model.game.Armor;
-import model.game.Item;
 import model.game.Weapon;
 
 import java.util.Random;
@@ -12,7 +11,6 @@ public class Character extends Entity {
 
     private int id;
 
-    private final LinkedList<Item> inventory;
     private LinkedList<Skill> skills;
 
     private int strength;
@@ -20,9 +18,8 @@ public class Character extends Entity {
     private Weapon weapon;
     private Armor armor;
 
-    public Character(String name, LinkedList<Item> inventory, int id, Armor armor, Weapon weapon) {
+    public Character(String name, int id, Armor armor, Weapon weapon) {
         super(name);
-        this.inventory = inventory;
         this.id = id;
         this.armor = armor;
         this.weapon = weapon;

@@ -170,4 +170,17 @@ public class LinkedList<E> {
             }
         }
     }
+
+    public E get(int index){
+
+        Node<E> current = head;
+        int count = 0;
+
+        while(current !=  null) {
+            if(index == ){}
+            current = current.getNext();
+        }
+
+
+    }
 }

@@ -3,16 +3,16 @@ package model.game;
 public class Skill {
     private String name;
     private int heal;
-    private int boostdamage;
+    private int boostDamage;
     private int defense;
-    private String text;
+    private String description;
 
-    public Skill(String name, int heal, int boostdamage, int defense, String text) {
+    public Skill(String name, int heal, int boostDamage, int defense, String description) {
         this.name = name;
         this.heal = heal;
-        this.boostdamage = boostdamage;
+        this.boostDamage = boostDamage;
         this.defense = defense;
-        this.text = text;
+        this.description = description;
     }
 
     public String getName() {
@@ -31,12 +31,12 @@ public class Skill {
         this.heal = heal;
     }
 
-    public int getBoostdamage() {
-        return boostdamage;
+    public int getBoostDamage() {
+        return boostDamage;
     }
 
-    public void setBoostdamage(int boostdamage) {
-        this.boostdamage = boostdamage;
+    public void setBoostDamage(int boostDamage) {
+        this.boostDamage = boostDamage;
     }
 
     public int getDefense() {
@@ -47,11 +47,11 @@ public class Skill {
         this.defense = defense;
     }
 
-    public String getText() {
-        return text;
+    public String getDescription() {
+        return description;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
