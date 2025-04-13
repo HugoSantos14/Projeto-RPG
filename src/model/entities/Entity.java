@@ -15,8 +15,9 @@ public abstract class Entity {
     }
 
     public Entity(String name, Integer maxHp) {
-        this.maxHp = maxHp;
         this.name = name;
+        this.maxHp = maxHp;
+        this.hp = maxHp;
         estusFlasks = 3;
     }
 

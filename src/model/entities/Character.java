@@ -1,9 +1,9 @@
 package model.entities;
 
 import model.game.Skill;
+import model.game.Weapon;
 import utils.datastructures.LinkedList;
 import model.game.Armor;
-import model.game.Weapon;
 
 import java.util.Random;
 

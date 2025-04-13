@@ -1,15 +1,15 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import model.entities.Character;
+import utils.datastructures.LinkedList;
 
 // CADASTRO DE PERSONAGENS
 public class CharacterService implements Repository<Character> {
 
-    private static final Map<Integer, Character> characters = new HashMap<>();
+    private static final Map<Integer, Character> characters = new LinkedHashMap<>();
     private static int idCounter = 1;
 
     @Override
@@ -29,8 +29,8 @@ public class CharacterService implements Repository<Character> {
     }
 
     @Override
-    public ArrayList<Character> getAll() {
-        return new ArrayList<>(characters.values());
+    public LinkedList<Character> getAll() {
+        return new LinkedList<>(characters.values());
     }
 
     @Override

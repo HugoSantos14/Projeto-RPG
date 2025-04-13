@@ -1,16 +1,17 @@
 package model.game;
 
 public class Skill {
+    
     private String name;
     private int heal;
-    private int boostDamage;
+    private int damage;
     private int defense;
     private String description;
 
-    public Skill(String name, int heal, int boostDamage, int defense, String description) {
+    public Skill(String name, int heal, int damage, int defense, String description) {
         this.name = name;
         this.heal = heal;
-        this.boostDamage = boostDamage;
+        this.damage = damage;
         this.defense = defense;
         this.description = description;
     }
@@ -31,12 +32,12 @@ public class Skill {
         this.heal = heal;
     }
 
-    public int getBoostDamage() {
-        return boostDamage;
+    public int getDamage() {
+        return damage;
     }
 
-    public void setBoostDamage(int boostDamage) {
-        this.boostDamage = boostDamage;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public int getDefense() {

@@ -1,12 +1,12 @@
 package services;
 
-import java.util.ArrayList;
+import utils.datastructures.LinkedList;
 
 public interface Repository<E> {
 
     void create(E e);
     void delete(int id);
     E getById(int id);
-    ArrayList<E> getAll();
+    LinkedList<E> getAll();
     boolean contains(E e);
 }

@@ -1,61 +1,29 @@
 package model.game;
 
-public class Weapon {
+public enum Weapon {
 
-    private String name;
-    private int baseDamage;
-    private boolean heavy;
-    private int maxDamage;
+    GREATSWORD("Espada Grande", 20, true),
+    SABER("Sabre", 10, false);
 
-    public Weapon(String name, int baseDamage, boolean heavy) {
+    Weapon(String name, int baseDamage, boolean heavy) {
         this.name = name;
         this.baseDamage = baseDamage;
         this.heavy = heavy;
-        this.maxDamage = baseDamage;
     }
 
-    public String printHeavy() {
-        if (isHeavy()) {
-            return "A arma escala com força!";
-        } else {
-            return "A arma escala com destreza!";
-        }
-    }
-
-    public int resetDamage(){
-        return baseDamage;
-    }
-
-    public int getMaxDamage() {
-        return maxDamage;
-    }
-
-    public void setMaxDamage(int maxDamage) {
-        this.maxDamage = maxDamage;
-    }
+    private final String name;
+    private final int baseDamage;
+    private final boolean heavy;
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getBaseDamage() {
         return baseDamage;
     }
 
-    public void setBaseDamage(int baseDamage) {
-        this.baseDamage = baseDamage;
-    }
-
     public boolean isHeavy() {
         return heavy;
     }
-
-    public void setHeavy(boolean heavy) {
-        this.heavy = heavy;
-    }
-
 }

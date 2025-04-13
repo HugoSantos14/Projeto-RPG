@@ -1,5 +1,6 @@
 package model.game;
 
+import model.entities.Character;
 import model.entities.Monster;
 import utils.datastructures.LinkedList;
 import utils.datastructures.Queue;
@@ -15,15 +16,8 @@ public class Battle {
     private final Queue<Entity> turns = new Queue<>();
     private final Stack<Entity> ranking = new Stack<>();
 
-    public Battle() {
+    public Battle(Character character) {
         LinkedList<Entity> participants = new LinkedList<>();
-        for (int i = 0; i < 3; i++) {
-            participants.add(new Monster(String.valueOf(i+1)));
-        }
-
-        for (Entity e : participants) {
-
-        }
     }
 
     public int getId() {

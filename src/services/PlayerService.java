@@ -1,15 +1,15 @@
 package services;
 
 import model.entities.Player;
+import utils.datastructures.LinkedList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 // CADASTRO DE JOGADORES
 public class PlayerService implements Repository<Player> {
 
-    private static final Map<Integer, Player> players = new HashMap<>();
+    private static final Map<Integer, Player> players = new LinkedHashMap<>();
     private static int idCounter = 1;
 
     @Override
@@ -29,14 +29,14 @@ public class PlayerService implements Repository<Player> {
     }
 
     @Override
-    public ArrayList<Player> getAll() {
-        return new ArrayList<>(players.values());
+    public LinkedList<Player> getAll() {
+        return new LinkedList<>(players.values());
     }
 
     @Override
     public boolean contains(Player player) {
         for (Player p : players.values()) {
-            if (player.getUsername().equals(p.getUsername())) {
+            if (player.equals(p)) {
                 return true;
             }
         }
@@ -44,9 +44,11 @@ public class PlayerService implements Repository<Player> {
     }
 
     public Player authenticate(Player player) {
-        for (Player p : players.values()) {
-            if (player.getUsername().equals(p.getUsername()) && player.getPassword().equals(p.getPassword())) {
-                return p;
+        if (contains(player)) {
+            for (Player p : players.values()) {
+                if (player.getPassword().equals(p.getPassword())) {
+                    return p;
+                }
             }
         }
         return null;

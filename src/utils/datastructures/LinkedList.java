@@ -1,5 +1,6 @@
 package utils.datastructures;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -10,6 +11,15 @@ public class LinkedList<E> implements Iterable<E> {
     private int size;
 
     public LinkedList() {
+    }
+
+    public LinkedList(Collection<? extends E> c) {
+        this();
+        if (c != null) {
+            for (E element : c) {
+                add(element);
+            }
+        }
     }
 
     public Node<E> getHead() {

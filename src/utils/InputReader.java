@@ -4,11 +4,7 @@ import java.util.Scanner;
 
 public class InputReader {
 
-    private final Scanner sc;
-
-    public InputReader() {
-        sc = new Scanner(System.in);
-    }
+    private static final Scanner sc = new Scanner(System.in);
 
     public String nextLine() {
         return sc.nextLine();
