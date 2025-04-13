@@ -43,6 +43,10 @@ public class PlayerService implements Repository<Player> {
         return false;
     }
 
+    public void update(Player player) {
+        players.put(player.getId(), player);
+    }
+
     public Player authenticate(Player player) {
         if (contains(player)) {
             for (Player p : players.values()) {

@@ -11,6 +11,8 @@ public enum Weapon {
         this.heavy = heavy;
     }
 
+
+
     private final String name;
     private final int baseDamage;
     private final boolean heavy;

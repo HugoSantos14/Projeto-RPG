@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Random;
+
 public abstract class Entity {
 
     private String name;
@@ -94,6 +96,10 @@ public abstract class Entity {
             }
             estusFlasks -= usedFlasks;
         }
+    }
+
+    public int attack() {
+        return 0;
     }
 
     public boolean isAlive() {

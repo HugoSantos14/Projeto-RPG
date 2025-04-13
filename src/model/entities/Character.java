@@ -29,6 +29,7 @@ public class Character extends Entity {
         super(name, maxHp);
     }
 
+    @Override
     public int attack() {
         Random dice = new Random();
         if (weapon.isHeavy()) {
@@ -91,8 +92,6 @@ public class Character extends Entity {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public void levelUp() {
         setLevel(getLevel() + 1);

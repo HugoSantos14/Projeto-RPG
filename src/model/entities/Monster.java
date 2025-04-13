@@ -13,8 +13,8 @@ public class Monster extends Entity {
         this.damage = damage;
         this.defense = defense;
     }
-
-    public Integer Attack() {
+    @Override
+    public int attack() {
         return damage;
     }
 
@@ -22,7 +22,7 @@ public class Monster extends Entity {
         this.damage = damage;
     }
 
-    public Integer getDefense() {
+    public int getDefense() {
         return defense;
     }
 
