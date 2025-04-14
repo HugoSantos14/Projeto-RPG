@@ -9,6 +9,7 @@ public abstract class Entity {
     private int agility;
     private int estusFlasks; // Frascos de cura!
 
+
     public Entity(String name) {
         this.name = name;
         estusFlasks = 3;

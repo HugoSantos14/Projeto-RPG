@@ -181,7 +181,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill1.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill1);
+                        currentPlayer.getCharacter().AddSkill(skill1);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill1.getPrice());
                         System.out.println("Sua habilidade agora é " + skill1.getName());
                     }
@@ -190,7 +190,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill2.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill2);
+                        currentPlayer.getCharacter().AddSkill(skill2);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill1.getPrice());
                         System.out.println("Sua habilidade agora é " + skill2.getName());
                     }
@@ -199,7 +199,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill3.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill3);
+                        currentPlayer.getCharacter().AddSkill(skill3);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill3.getPrice());
                         System.out.println("Sua habilidade agora é " + skill3.getName());
                     }
@@ -208,7 +208,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill4.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill4);
+                        currentPlayer.getCharacter().AddSkill(skill4);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill4.getPrice());
                         System.out.println("Sua habilidade agora é " + skill4.getName());
                     }
@@ -217,7 +217,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill5.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill5);
+                        currentPlayer.getCharacter().AddSkill(skill5);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill5.getPrice());
                         System.out.println("Sua habilidade agora é " + skill5.getName());
                     }
@@ -226,7 +226,7 @@ public class View {
                     if (currentPlayer.getRunes() < skill6.getPrice()) {
                         System.out.println("Você não tem runas para comprar essa Skill");
                     } else{
-                        currentPlayer.getCharacter().setCurrentSkill(skill6);
+                        currentPlayer.getCharacter().AddSkill(skill6);
                         currentPlayer.setRunes( currentPlayer.getRunes() - skill6.getPrice());
                         System.out.println("Sua habilidade agora é " + skill6.getName());
                     }
@@ -392,7 +392,13 @@ public class View {
                 }
                 break;
             case "2":
-
+                if(p1.getCurrentSkill().temUsos()){
+                    if(p1.getCurrentSkill().getDamage() < p2.getDefense()){
+                        System.out.println("Perfect defense! No damage to " + p2.getName());
+                    } else {
+                        p2.setHp( p2.getHp() - p1.getCurrentSkill().getDamage() + p2.getDefense());
+                    }
+                }
             case "3":
                 System.out.println("How many estus you want to use? you have " + p1.getEstusFlasks());
                 int estusFlasks = sc.nextInt();
@@ -511,7 +517,7 @@ public class View {
                 }
                 break;
             case 2:
-                //skill
+
                 break;
             case 3:
                 if(m.getEstusFlasks() < 0){

@@ -17,14 +17,12 @@ public class Character extends Entity {
     private int dexterity;
     private Weapon weapon;
     private Armor armor;
-    private Skill currentSkill;
 
-    public Character(String name, int id, Armor armor, Weapon weapon, Skill currentSkill) {
+    public Character(String name, int id, Armor armor, Weapon weapon) {
         super(name);
         this.id = id;
         this.armor = armor;
         this.weapon = weapon;
-        this.currentSkill = currentSkill;
     }
 
     public Character(String name, Integer maxHp) {
@@ -41,14 +39,6 @@ public class Character extends Entity {
             // ataque por destreza 3 d4
             return dice.nextInt(4) + 3 + dice.nextInt(4) + dice.nextInt(4) + getDexterity() + getWeapon().getBaseDamage();
         }
-    }
-
-    public Skill getCurrentSkill() {
-        return currentSkill;
-    }
-
-    public void setCurrentSkill(Skill currentSkill) {
-        this.currentSkill = currentSkill;
     }
 
     public void AddSkill(Skill skill) {

@@ -9,16 +9,18 @@ public enum Skill {
     TIROPRECISO("Tiro Preciso", 25, "Um disparo certeiro que atinge pontos vitais!", 0),
     NEVASCA("Nevasca", 40, "Uma tempestade de gelo aparece e causa dano ao inimigo!", 500);
 
-    private String name;
-    private int damage;
-    private String description;
-    private int price;
+    private final String name;
+    private final int damage;
+    private final String description;
+    private final int price;
+    private int usos;
 
     Skill(String name, int damage, String description, int price) {
         this.name = name;
         this.damage = damage;
         this.description = description;
         this.price = price;
+        this.usos = 3;
     }
 
     public String getName() {
@@ -37,5 +39,13 @@ public enum Skill {
     public int getPrice() {
         System.out.println(" price " + price);
         return price;
+    }
+
+    public boolean temUsos(){
+        return usos > 0;
+    }
+
+    public void setUsos(int usos) {
+        this.usos = usos;
     }
 }
