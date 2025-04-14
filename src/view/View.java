@@ -254,7 +254,19 @@ public class View {
                     System.out.println("Actual Hp to "+ p2.getName() + "is " + p2.getHp());
                 }
                 break;
-            case "2", "3":
+            case "2":
+
+            case "3":
+                System.out.println("How many estus you want to use? you have " + p1.getEstusFlasks());
+                int estusFlasks = sc.nextInt();
+
+                if(p1.getEstusFlasks() < estusFlasks) {
+                    System.out.println("You cant use estus flaks!");
+                } else {
+                    System.out.println("You used " + estusFlasks + " flaks!");
+                    System.out.println("You have now " + p1.getEstusFlasks() + " flaks!");
+                    p1.heal(estusFlasks);
+                }
                 break;
             default:
                 System.out.println("Turno perdido por sua indecisão!");
