@@ -5,6 +5,7 @@ import model.entities.Monster;
 import model.entities.Player;
 import model.game.Armor;
 import model.game.Battle;
+import model.game.Skill;
 import model.game.Weapon;
 import services.CharacterService;
 import services.PlayerService;
@@ -160,6 +161,81 @@ public class View {
 
     public void battleScreen(Battle battle) {
 
+    }
+
+    public void setSkillOnPlayer(Skill skill1, Skill skill2, Skill skill3 , Skill skill4 , Skill skill5 , Skill skill6) {
+        while (currentPlayer.getCharacter().getArmor() == null) {
+            System.out.println("============== SKILLs ISAAC ==============");
+            System.out.println("Escolha sua Armadura de aventureiro:");
+            System.out.println("1 - " + skill1.getName() + skill1.getDamage() + "\n" + skill1.getPrice());
+            System.out.println("2 - " + skill2.getName() + skill2.getDamage() + "\n" + skill2.getPrice());
+            System.out.println("3 - " + skill3.getName() + skill3.getDamage() + "\n" + skill3.getPrice());
+            System.out.println("4 - " + skill4.getName() + skill4.getDamage() + "\n" + skill4.getPrice());
+            System.out.println("5 - " + skill5.getName() + skill5.getDamage() + "\n" + skill5.getPrice());
+            System.out.println("6 - " + skill6.getName() + skill6.getDamage() + "\n" + skill6.getPrice());
+            System.out.print("Digite o número correspondente à sua escolha: ");
+            InputReader sc = new InputReader();
+
+            switch (sc.nextInt()) {
+                case 1:
+                    if (currentPlayer.getRunes() < skill1.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill1);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill1.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill1.getName());
+                    }
+                    break;
+                case 2:
+                    if (currentPlayer.getRunes() < skill2.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill2);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill1.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill2.getName());
+                    }
+                    break;
+                case 3:
+                    if (currentPlayer.getRunes() < skill3.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill3);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill3.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill3.getName());
+                    }
+                    break;
+                case 4:
+                    if (currentPlayer.getRunes() < skill4.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill4);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill4.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill4.getName());
+                    }
+                    break;
+                case 5:
+                    if (currentPlayer.getRunes() < skill5.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill5);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill5.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill5.getName());
+                    }
+                    break;
+                case 6:
+                    if (currentPlayer.getRunes() < skill6.getPrice()) {
+                        System.out.println("Você não tem runas para comprar essa Skill");
+                    } else{
+                        currentPlayer.getCharacter().setCurrentSkill(skill6);
+                        currentPlayer.setRunes( currentPlayer.getRunes() - skill6.getPrice());
+                        System.out.println("Sua habilidade agora é " + skill6.getName());
+                    }
+                    break;
+                default:
+                    System.out.println("Não existe esse Skill!");
+                    break;
+            }
+        }
     }
 
     public void setArmorOnPlayer(Armor armor1, Armor armor2, Armor armor3, Armor armor4, Armor armor5, Armor armor6) {
@@ -453,6 +529,7 @@ public class View {
 
         while(true) {
             characterConfiguration(20);
+            setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
             setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
             setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);
 

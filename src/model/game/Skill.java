@@ -1,58 +1,41 @@
 package model.game;
 
-public class Skill {
-    
-    private String name;
-    private int heal;
-    private int damage;
-    private int defense;
-    private String description;
+public enum Skill {
 
-    public Skill(String name, int heal, int damage, int defense, String description) {
+    BOLADEFOGO("Bola de Fogo", 40, "Uma esfera de fogo que explode o inimigo!", 500),
+    TERREMOTO("Terremoto", 35, "Uma fissura no chão que engole o inimigo!", 450),
+    CORTECRITICO("Corte Crítico", 25, "Golpe rápido e preciso que acerta o alvo!", 0),
+    CORTEFLAMEJANTE("Corte Flamejante", 30, "Uma lâmina de chamas acerta o inimigo!", 400),
+    TIROPRECISO("Tiro Preciso", 25, "Um disparo certeiro que atinge pontos vitais!", 0),
+    NEVASCA("Nevasca", 40, "Uma tempestade de gelo aparece e causa dano ao inimigo!", 500);
+
+    private String name;
+    private int damage;
+    private String description;
+    private int price;
+
+    Skill(String name, int damage, String description, int price) {
         this.name = name;
-        this.heal = heal;
         this.damage = damage;
-        this.defense = defense;
         this.description = description;
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getHeal() {
-        return heal;
-    }
-
-    public void setHeal(int heal) {
-        this.heal = heal;
-    }
-
     public int getDamage() {
+        System.out.println(" - " + damage);
         return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getPrice() {
+        System.out.println(" price " + price);
+        return price;
     }
 }
