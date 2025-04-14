@@ -162,35 +162,96 @@ public class View {
 
     }
 
-    public void setArmorOnPlayer(Armor armor, Armor armor2, Armor armor3) {
+    public void setArmorOnPlayer(Armor armor1, Armor armor2, Armor armor3, Armor armor4, Armor armor5, Armor armor6) {
         while (currentPlayer.getCharacter().getArmor() == null) {
+            System.out.println("============== ARMOR ISAAC ==============");
             System.out.println("Escolha sua Armadura de aventureiro:");
-            System.out.println("1 - " + armor.getName() + ", agilidade para uso "  + armor.getConstForUse());
-            System.out.println("2 - " + armor2.getName()+ ", agilidade para uso " + armor2.getConstForUse());
-            System.out.println("3 - " + armor3.getName()+ ", agilidade para uso " + armor3.getConstForUse());
+            System.out.println("1 - " + armor1.getName()+ ", agilidade para uso " + armor1.getConstForUse() + "\n" + armor1.getPrice());
+            System.out.println("2 - " + armor2.getName()+ ", agilidade para uso " + armor2.getConstForUse() + "\n" + armor2.getPrice());
+            System.out.println("3 - " + armor3.getName()+ ", agilidade para uso " + armor3.getConstForUse() + "\n" + armor3.getPrice());
+            System.out.println("4 - " + armor3.getName()+ ", agilidade para uso " + armor4.getConstForUse() + "\n" + armor4.getPrice());
+            System.out.println("5 - " + armor3.getName()+ ", agilidade para uso " + armor5.getConstForUse() + "\n" + armor5.getPrice());
+            System.out.println("6 - " + armor3.getName()+ ", agilidade para uso " + armor6.getConstForUse() + "\n" + armor6.getPrice());
             System.out.print("Digite o número correspondente à sua escolha: ");
             InputReader sc = new InputReader();
 
             switch (sc.nextInt()) {
                 case 1:
-                    if(currentPlayer.getCharacter().getAgility() >= armor.getConstForUse()) {
-                        currentPlayer.getCharacter().setArmor(armor);
+                    if(currentPlayer.getCharacter().getAgility() >= armor1.getConstForUse()) {
+                        if(currentPlayer.getRunes() < armor1.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor1);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor1.getPrice());
+                            System.out.println("Your armor now is " + armor1.getName());
+                        }
                     } else {
-                        System.out.println("Sem agilidade para uso, precisa de " + armor.getConstForUse() + " para uso!");
+                        System.out.println("Sem agilidade para uso, precisa de " + armor1.getConstForUse() + " para uso!");
                     }
                     break;
                 case 2:
                     if(currentPlayer.getCharacter().getAgility() >= armor2.getConstForUse()) {
-                        currentPlayer.getCharacter().setArmor(armor2);
+                        if(currentPlayer.getRunes() < armor2.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor2);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor2.getPrice());
+                            System.out.println("Your armor now is " + armor2.getName());
+                        }
                     } else {
                         System.out.println("Sem agilidade para uso, precisa de " + armor2.getConstForUse() + " para uso!");
                     }
                     break;
                 case 3:
                     if(currentPlayer.getCharacter().getAgility() >= armor3.getConstForUse()) {
-                        currentPlayer.getCharacter().setArmor(armor3);
+                        if(currentPlayer.getRunes() < armor3.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor3);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor3.getPrice());
+                            System.out.println("Your armor now is " + armor3.getName());
+                        }
                     } else {
                         System.out.println("Sem agilidade para uso, precisa de " + armor3.getConstForUse() + " para uso!");
+                    }
+                    break;
+                case 4:
+                    if(currentPlayer.getCharacter().getAgility() >= armor4.getConstForUse()) {
+                        if(currentPlayer.getRunes() < armor4.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor4);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor4.getPrice());
+                            System.out.println("Your armor now is " + armor4.getName());
+                        }
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor4.getConstForUse() + " para uso!");
+                    }
+                    break;
+                case 5:
+                    if(currentPlayer.getCharacter().getAgility() >= armor5.getConstForUse()) {
+                        if(currentPlayer.getRunes() < armor5.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor5);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor5.getPrice());
+                            System.out.println("Your armor now is " + armor5.getName());
+                        }
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor5.getConstForUse() + " para uso!");
+                    }
+                    break;
+                case 6:
+                    if(currentPlayer.getCharacter().getAgility() >= armor6.getConstForUse()) {
+                        if(currentPlayer.getRunes() < armor6.getPrice()) {
+                            System.out.println("You dont have the runes to buy this armor!");
+                        } else {
+                            currentPlayer.getCharacter().setArmor(armor6);
+                            currentPlayer.setRunes(currentPlayer.getRunes() - armor6.getPrice());
+                            System.out.println("Your armor now is " + armor6.getName());
+                        }
+                    } else {
+                        System.out.println("Sem agilidade para uso, precisa de " + armor6.getConstForUse() + " para uso!");
                     }
                     break;
                 default:
@@ -274,24 +335,73 @@ public class View {
         }
     }
 
-    public void setWeaponOnPlayer(Weapon weapon, Weapon weapon2, Weapon weapon3) {
+    public void setWeaponOnPlayer(Weapon weapon1, Weapon weapon2, Weapon weapon3, Weapon weapon4, Weapon weapon5, Weapon weapon6) {
         while (currentPlayer.getCharacter().getWeapon() == null) {
+            System.out.println("============== WEAPONS ISAAC ==============");
             System.out.println("Escolha sua arma de aventureiro:");
-            System.out.println("1 - " + weapon.getName());
-            System.out.println("2 - " + weapon2.getName());
-            System.out.println("3 - " + weapon3.getName());
+            System.out.println("1 - " + weapon1.getName() + weapon1.isHeavy() + "\n" + weapon1.getPrice());
+            System.out.println("2 - " + weapon2.getName() + weapon2.isHeavy() + "\n" + weapon2.getPrice());
+            System.out.println("3 - " + weapon3.getName() + weapon3.isHeavy() + "\n" + weapon3.getPrice());
+            System.out.println("4 - " + weapon3.getName() + weapon4.isHeavy() + "\n" + weapon4.getPrice());
+            System.out.println("5 - " + weapon3.getName() + weapon5.isHeavy() + "\n" + weapon5.getPrice());
+            System.out.println("6 - " + weapon3.getName() + weapon6.isHeavy() + "\n" + weapon6.getPrice());
             System.out.print("Digite o número correspondente à sua escolha: ");
             InputReader sc = new InputReader();
 
             switch (sc.nextInt()) {
                 case 1:
-                    currentPlayer.getCharacter().setWeapon(weapon);
+                    if(currentPlayer.getRunes() < weapon1.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon1);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon1.getPrice());
+                        System.out.println("Your weapon now is " + weapon1.getName());
+                    }
                     break;
                 case 2:
-                    currentPlayer.getCharacter().setWeapon(weapon2);
+                    if(currentPlayer.getRunes() < weapon2.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon2);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon2.getPrice());
+                        System.out.println("Your weapon now is " + weapon2.getName());
+                    }
                     break;
                 case 3:
-                    currentPlayer.getCharacter().setWeapon(weapon3);
+                    if(currentPlayer.getRunes() < weapon3.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon3);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon3.getPrice());
+                        System.out.println("Your weapon now is " + weapon3.getName());
+                    }
+                    break;
+                case 4:
+                    if(currentPlayer.getRunes() < weapon4.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon4);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon4.getPrice());
+                        System.out.println("Your weapon now is " + weapon4.getName());
+                    }
+                    break;
+                case 5:
+                    if(currentPlayer.getRunes() < weapon5.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon5);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon5.getPrice());
+                        System.out.println("Your weapon now is " + weapon5.getName());
+                    }
+                    break;
+                case 6:
+                    if(currentPlayer.getRunes() < weapon6.getPrice()){
+                        System.out.println("You dont have the runes to buy this weapon");
+                    } else {
+                        currentPlayer.getCharacter().setWeapon(weapon6);
+                        currentPlayer.setRunes(currentPlayer.getRunes() - weapon6.getPrice());
+                        System.out.println("Your weapon now is " + weapon6.getName());
+                    }
                     break;
                 default:
                     System.out.println("Isso não é arma, por favor digite novamente!");
@@ -328,7 +438,11 @@ public class View {
                 //skill
                 break;
             case 3:
-                //item
+                if(m.getEstusFlasks() < 0){
+                    System.out.println(m.getName()+" cant use estus flaks!");
+                } else {
+                    m.heal(1);
+                }
                 break;
         }
     }
@@ -339,8 +453,8 @@ public class View {
 
         while(true) {
             characterConfiguration(20);
-            setArmorOnPlayer();
-            setWeaponOnPlayer();
+            setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
+            setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);
 
             System.out.println(currentPlayer.getCharacter().getName() + ", is this good for you?");
             System.out.println("1 - Yes");
