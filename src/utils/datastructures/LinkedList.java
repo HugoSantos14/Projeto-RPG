@@ -204,6 +204,20 @@ public class LinkedList<E> implements Iterable<E> {
         return current.getData();
     }
 
+    public int indexOf(E data) {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Lista vazia");
+        }
+
+        int count = 0;
+        Node<E> current = head;
+        while (current != null && !current.getData().equals(data)) {
+            current = current.getNext();
+            count++;
+        }
+        return count;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new LinkedListIterator();

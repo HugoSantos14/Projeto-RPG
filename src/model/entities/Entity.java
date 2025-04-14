@@ -1,7 +1,5 @@
 package model.entities;
 
-import java.util.Random;
-
 public abstract class Entity {
 
     private String name;
@@ -104,5 +102,10 @@ public abstract class Entity {
 
     public boolean isAlive() {
         return hp > 0;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
