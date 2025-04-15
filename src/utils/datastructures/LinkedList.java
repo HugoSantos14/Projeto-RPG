@@ -22,6 +22,19 @@ public class LinkedList<E> implements Iterable<E> {
         }
     }
 
+    public boolean contains(E data) {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Lista vazia");
+        }
+
+        Node<E> current = head;
+        while (current != null && !current.getData().equals(data)) {
+            current = current.getNext();
+        }
+
+        return current != null;
+    }
+
     public Node<E> getHead() {
         return head;
     }

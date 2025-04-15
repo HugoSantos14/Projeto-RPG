@@ -91,7 +91,7 @@ public class Battle {
             }
 
             if (currentEntity instanceof Character) {
-                view.playerTurn(currentEntity, this);
+                view.playerTurn((Character) currentEntity, this);
             } else {
                 view.monsterTurn(view.getCurrentPlayer(), currentEntity);
             }

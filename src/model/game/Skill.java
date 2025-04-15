@@ -13,14 +13,32 @@ public enum Skill {
     private final int damage;
     private final String description;
     private final int price;
-    private int usos;
+    private int remainingUses;
+    private int maxUses;
 
     Skill(String name, int damage, String description, int price) {
         this.name = name;
         this.damage = damage;
         this.description = description;
         this.price = price;
-        this.usos = 3;
+        this.maxUses = 3;
+        this.remainingUses = maxUses;
+    }
+
+    public boolean use() {
+        if (remainingUses > 0) {
+            remainingUses--;
+            return true;
+        }
+        return false;
+    }
+
+    public void resetUses() {
+        remainingUses = maxUses;
+    }
+
+    public boolean hasUses() {
+        return remainingUses > 0;
     }
 
     public String getName() {
@@ -41,11 +59,23 @@ public enum Skill {
         return price;
     }
 
-    public boolean temUsos(){
-        return usos > 0;
+    public int getRemainingUses() {
+        return remainingUses;
     }
 
-    public void setUsos(int usos) {
-        this.usos = usos;
+    public void setRemainingUses(int remainingUses) {
+        this.remainingUses = remainingUses;
+    }
+
+    public int getMaxUses() {
+        return maxUses;
+    }
+
+    public boolean temUsos(){
+        return maxUses > 0;
+    }
+
+    public void setMaxUses(int maxUses) {
+        this.maxUses = maxUses;
     }
 }

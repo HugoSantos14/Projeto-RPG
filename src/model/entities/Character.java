@@ -56,6 +56,32 @@ public class Character extends Entity {
         }
     }
 
+    public boolean useSkill(Skill skill, Entity target) {
+        if (skills.contains(skill) && skill.hasUses()) {
+            int damage = calculateSkillDamage(skill);
+            target.takeDamage(damage);
+            skill.use();
+            return true;
+        }
+        return false;
+    }
+
+    private int calculateSkillDamage(Skill skill) {
+        return skill.getDamage();
+    }
+
+    public void addSkill(Skill skill) {
+        if (!skills.contains(skill)) {
+            skills.add(skill);
+        }
+    }
+
+    public void resetAllSkillUses() {
+        for (Skill skill : skills) {
+            skill.resetUses();
+        }
+    }
+
     private void levelUp() {
         setLevel(getLevel() + 1);
         experience -= nextLevelExp;

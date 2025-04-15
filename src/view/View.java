@@ -114,6 +114,7 @@ public class View {
             switch (sc.nextInt()) {
                 case 1:
                     startBattle(new Battle(currentPlayer.getCharacter()));
+                    resetAfterBattle(currentPlayer.getCharacter());
                     break;
                 case 2:
                     showCharacter(currentPlayer.getCharacter());
@@ -128,10 +129,10 @@ public class View {
                     setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);
                     break;
                 case 5:
-                    setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
+                    setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
                     break;
                 case 6:
-                    setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
+                    setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
                     break;
                 case 7:
                     System.out.println("Deseja sair da conta? (S/N)");
@@ -161,7 +162,15 @@ public class View {
         System.out.println("\nEquipamento:");
         System.out.println("Arma: " + character.getWeapon().getName());
         System.out.println("Armadura: " + character.getArmor().getName());
-        //printar todas as skills
+        if (character.getSkills().isEmpty()) {
+            System.out.println("Nenhuma habilidade aprendida");
+        } else {
+            for (Skill skill : character.getSkills()) {
+                System.out.printf("- %s: %s (Dano: %d, Usos: %d/%d)\n",
+                        skill.getName(), skill.getDescription(),
+                        skill.getDamage(), skill.getRemainingUses(), skill.getMaxUses());
+            }
+        }
     }
 
     public void characterConfiguration(Character p1) {
@@ -223,7 +232,7 @@ public class View {
     public void setSkillOnPlayer(Skill skill1, Skill skill2, Skill skill3 , Skill skill4 , Skill skill5 , Skill skill6) {
         while (currentPlayer.getCharacter().getSkills().isEmpty()) {
             System.out.println("============== SKILLs ISAAC ==============");
-            System.out.println("Escolha sua Armadura de aventureiro:");
+            System.out.println("Escolha sua Skill de aventureiro:");
             System.out.println("1 - " + skill1.getName() + skill1.getDamage() + "\n" + skill1.getPrice());
             System.out.println("2 - " + skill2.getName() + skill2.getDamage() + "\n" + skill2.getPrice());
             System.out.println("3 - " + skill3.getName() + skill3.getDamage() + "\n" + skill3.getPrice());
@@ -421,7 +430,7 @@ public class View {
         }
     }
 
-    public void playerTurn(Entity player, Battle battle) {
+    public void playerTurn(Character player, Battle battle) {
         System.out.println("\n===== SEU TURNO: " + player.getName() + " =====");
         System.out.println("1. Atacar");
         System.out.println("2. Usar Habilidade");
@@ -441,13 +450,36 @@ public class View {
                 }
                 break;
             case 2:
-                // if(p1.getCurrentSkill().temUsos()){
-                //     if(p1.getCurrentSkill().getDamage() < p2.getDefense()){
-                //         System.out.println("Perfect defense! No damage to " + p2.getName());
-                //     } else {
-                //         p2.setHp( p2.getHp() - p1.getCurrentSkill().getDamage() + p2.getDefense());
-                //     }
-                // }
+                if (player.getSkills().isEmpty()) {
+                    System.out.println("Você não tem habilidades disponíveis!");
+                    break;
+                }
+
+                System.out.println("\nEscolha uma habilidade:");
+                int i = 1;
+                for (Skill skill : player.getSkills()) {
+                    System.out.printf("%d. %s (%d DMG) - Usos: %d/%d\n",
+                            i++, skill.getName(), skill.getDamage(),
+                            skill.getRemainingUses(), skill.getMaxUses());
+                }
+
+                int skillChoice = sc.nextInt() - 1;
+                if (skillChoice >= 0 && skillChoice < player.getSkills().size()) {
+                        Skill selectedSkill = player.getSkills().get(skillChoice);
+                    target = chooseTarget(battle);
+
+                    if (target != null) {
+                        if (player.useSkill(selectedSkill, target)) {
+                            System.out.printf("%s usou %s em %s causando %d de dano!\n",
+                                    player.getName(), selectedSkill.getName(),
+                                    target.getName(), selectedSkill.getDamage());
+                        } else {
+                            System.out.println("Não há usos restantes desta habilidade!");
+                        }
+                    }
+                } else {
+                    System.out.println("Habilidade inválida!");
+                }
                 break;
             case 3:
                 System.out.println("Quantos frascos de Estus você quer usar? você tem " + player.getEstusFlasks());
@@ -642,5 +674,10 @@ public class View {
             }
         }
 
+    }
+
+    public void resetAfterBattle(Character character) {
+        character.resetAllSkillUses();
+        character.setHp(character.getMaxHp());
     }
 }
