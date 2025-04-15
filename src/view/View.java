@@ -17,7 +17,7 @@ import java.util.Random;
 // TELAS DO JOGO
 public class View {
 
-    private Player currentPlayer; // Jogador que está logado atualmente!
+    private Player currentPlayer = new Player("Master", "1234"); // Jogador que está logado atualmente!
     private static final InputReader sc = new InputReader();
     private static final PlayerService ps = new PlayerService();
     private static final CharacterService cs = new CharacterService();
@@ -83,11 +83,15 @@ public class View {
             String password = sc.nextLine();
             currentPlayer = new Player(username, password);
 
+            // Adicione esta linha para criar um novo Character
+            currentPlayer.setCharacter(new Character("", 0, null, null));
+
             if (ps.contains(currentPlayer)) {
                 System.err.println("Já existe um usuário com esse nome.");
             } else {
                 ps.create(currentPlayer);
                 System.out.println("Usuário " + currentPlayer.getUsername() + " cadastrado com sucesso!");
+                configCharacter();
                 mainMenu();
                 break;
             }
@@ -99,7 +103,8 @@ public class View {
             System.out.println("\n===== SEJA BEM-VINDO(A), " + currentPlayer.getUsername().toUpperCase() + "! =====");
             System.out.println("1. Jogar");
             System.out.println("2. Ver personagem");
-            System.out.println("3. Sair");
+            System.out.println("3. Level up");
+            System.out.println("4. Sair");
             System.out.print("-> ");
             switch (sc.nextInt()) {
                 case 1:
@@ -109,6 +114,12 @@ public class View {
                     showCharacter(currentPlayer.getCharacter());
                     break;
                 case 3:
+                    if(currentPlayer.getCharacter().getRewardPoints() < 0) {
+                        System.out.println("Você não tem pontos para aumentar seus atributos!");
+                    } else {
+                        characterConfiguration(currentPlayer.getCharacter().getRewardPoints());
+                    }
+                case 4:
                     System.out.println("Deseja sair da conta? (S/N)");
                     System.out.print("-> ");
                     if (sc.nextBoolean()) {
@@ -121,18 +132,19 @@ public class View {
     }
 
     public void showCharacter(Character character) {
-        System.out.println("|======================================|");
-        System.out.println("| Nome: " + character.getName() + " |");
-        System.out.println("|======================================|");
-        System.out.println("| Hp: " + character.getMaxHp() + " |");
-        System.out.println("| Força: " + character.getStrength() + " |");
-        System.out.println("| Destreza: " + character.getDexterity() + " |");
-        System.out.println("| Agilidade: " + character.getAgility() + " |");
-        System.out.println("| Defesa: " + character.getArmor().getBaseDefense() + " |");
-        System.out.println("|--------------------------------------|");
-        System.out.println("| Arma: " + character.getWeapon().getName() + " |");
-        System.out.println("| Armadura: " + character.getArmor().getName() + " |");
-        System.out.println("|======================================|");
+        System.out.println("\n=== STATUS DO PERSONAGEM ===");
+        System.out.println("Nome: " + character.getName());
+        System.out.println("Nível: " + character.getLevel());
+        System.out.printf("XP: %d/%d\n", character.getExperience(), character.getNextLevelExp());
+        System.out.println("Pontos disponíveis: " + character.getRewardPoints());
+        System.out.println("\nAtributos:");
+        System.out.println("Força: " + character.getStrength());
+        System.out.println("Destreza: " + character.getDexterity());
+        System.out.println("Agilidade: " + character.getAgility());
+        System.out.println("\nEquipamento:");
+        System.out.println("Arma: " + character.getWeapon().getName());
+        System.out.println("Armadura: " + character.getArmor().getName());
+        //printar todas as skills
     }
 
     public void characterConfiguration(int rewardpoints) {
@@ -151,12 +163,16 @@ public class View {
             switch (sc.nextInt()) {
                 case 1:
                     currentPlayer.getCharacter().setStrength(currentPlayer.getCharacter().getStrength() + 1);
+                    rewardpoints--;
                     break;
                 case 2:
                     currentPlayer.getCharacter().setDexterity(currentPlayer.getCharacter().getDexterity() + 1);
+                    rewardpoints--;
                     break;
                 case 3:
                     currentPlayer.getCharacter().setAgility(currentPlayer.getCharacter().getAgility() + 1);
+                    rewardpoints--;
+                    break;
                 default:
                     System.out.println("Não Existe esse atributo!");
                     break;
@@ -176,7 +192,7 @@ public class View {
     }
 
     public void setSkillOnPlayer(Skill skill1, Skill skill2, Skill skill3 , Skill skill4 , Skill skill5 , Skill skill6) {
-        while (currentPlayer.getCharacter().getArmor() == null) {
+        while (currentPlayer.getCharacter().getSkills().isEmpty()) {
             System.out.println("============== SKILLs ISAAC ==============");
             System.out.println("Escolha sua Armadura de aventureiro:");
             System.out.println("1 - " + skill1.getName() + skill1.getDamage() + "\n" + skill1.getPrice());
@@ -551,7 +567,7 @@ public class View {
         setName();
 
         while(true) {
-            characterConfiguration(20);
+            characterConfiguration(currentPlayer.getCharacter().getRewardPoints());
             setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
             setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
             setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);

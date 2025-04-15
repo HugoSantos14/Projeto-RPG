@@ -13,6 +13,10 @@ public class Character extends Entity {
 
     private LinkedList<Skill> skills;
 
+    private int experience;
+    private int nextLevelExp;
+    private int rewardPoints;
+
     private int strength;
     private int dexterity;
     private Weapon weapon;
@@ -23,6 +27,10 @@ public class Character extends Entity {
         this.id = id;
         this.armor = armor;
         this.weapon = weapon;
+        this.skills = new LinkedList<>();
+        this.experience = 0;
+        this.nextLevelExp = 100;
+        this.rewardPoints = 20;
     }
 
     public Character(String name, Integer maxHp) {
@@ -41,6 +49,23 @@ public class Character extends Entity {
         }
     }
 
+    public void addExperience(int amount) {
+        experience += amount;
+        while (experience >= nextLevelExp) {
+            levelUp();
+        }
+    }
+
+    private void levelUp() {
+        setLevel(getLevel() + 1);
+        experience -= nextLevelExp;
+        nextLevelExp = (int)(nextLevelExp * 1.5); // Aumenta a XP necessária
+        rewardPoints += 3; // Pontos para distribuir
+        System.out.println("\n=== LEVEL UP! ===");
+        System.out.println("Você alcançou o nível " + getLevel() + "!");
+        System.out.println("Ganhou 3 pontos de atributo!");
+    }
+
     public void AddSkill(Skill skill) {
         skills.add(skill);
     }
@@ -51,6 +76,30 @@ public class Character extends Entity {
 
     public void setSkills(LinkedList<Skill> skills) {
         this.skills = skills;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getNextLevelExp() {
+        return nextLevelExp;
+    }
+
+    public void setNextLevelExp(int nextLevelExp) {
+        this.nextLevelExp = nextLevelExp;
+    }
+
+    public int getRewardPoints() {
+        return rewardPoints;
+    }
+
+    public void setRewardPoints(int rewardPoints) {
+        this.rewardPoints = rewardPoints;
     }
 
     public int getDexterity() {
@@ -91,9 +140,5 @@ public class Character extends Entity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void levelUp() {
-        setLevel(getLevel() + 1);
     }
 }

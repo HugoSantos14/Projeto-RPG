@@ -9,6 +9,7 @@ import utils.datastructures.Stack;
 import view.View;
 import model.entities.Entity;
 
+import java.util.List;
 import java.util.Random;
 
 public class Battle {
@@ -104,12 +105,28 @@ public class Battle {
         turnCounter++;
     }
 
+    private int calculateXp(LinkedList<Entity> enemies) {
+        int total = 0;
+        for (Entity enemy : enemies) {
+            total += enemy.getLevel() * 10;
+        }
+        return total;
+    }
+
     public Entity verifyWinner() {
         if (turns.size() == 1) {
-            ranking.push(turns.peek());
+            Entity winner = turns.peek();
+            ranking.push(winner);
             running = false;
             System.out.println("===== FIM DA LUTA =====");
             System.out.println("===== O VENCEDOR É: " + ranking.peek().getName() + " =====");
+
+            if (winner instanceof Character) {
+                int xpGained = calculateXp(battle.getEnemies());
+                currentPlayer.getCharacter().addExperience(xpGained);
+                System.out.println("\nVocê ganhou " + xpGained + " pontos de experiência!");
+            }
+
             return ranking.peek();
         }
         return null;

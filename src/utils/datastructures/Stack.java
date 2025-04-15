@@ -1,6 +1,8 @@
 package utils.datastructures;
 
-public class Stack<E> {
+import java.util.Iterator;
+
+public class Stack<E> implements Iterable<E> {
 
     private Node<E> head;
     private int size;
@@ -91,5 +93,10 @@ public class Stack<E> {
             return null;
         }
         return head.getData();
+    }
+
+    private class StackIterator implements Iterator<E> {
+        private Node<E> current = head;
+
     }
 }
