@@ -219,7 +219,9 @@ public class View {
             Entity winner = battle.verifyWinner();
             if (winner != null) {
                 System.out.println("\n===== FIM DA BATALHA =====");
-                System.out.println("Vencedor: " + winner.getName());
+                System.out.println("===== O VENCEDOR É: " + winner.getName().toUpperCase() + " =====");
+                System.out.println(battle.getRanking());
+                System.out.println("=================");
                 if (winner instanceof Character) {
                     int xpGained = battle.calculateXp(battle.getRanking());
                     System.out.println("Você ganhou " + xpGained + " de experiência!");
@@ -311,9 +313,9 @@ public class View {
             System.out.println("1 - " + armor1.getName()+ ", agilidade para uso " + armor1.getConstForUse() + "\n" + armor1.getPrice());
             System.out.println("2 - " + armor2.getName()+ ", agilidade para uso " + armor2.getConstForUse() + "\n" + armor2.getPrice());
             System.out.println("3 - " + armor3.getName()+ ", agilidade para uso " + armor3.getConstForUse() + "\n" + armor3.getPrice());
-            System.out.println("4 - " + armor3.getName()+ ", agilidade para uso " + armor4.getConstForUse() + "\n" + armor4.getPrice());
-            System.out.println("5 - " + armor3.getName()+ ", agilidade para uso " + armor5.getConstForUse() + "\n" + armor5.getPrice());
-            System.out.println("6 - " + armor3.getName()+ ", agilidade para uso " + armor6.getConstForUse() + "\n" + armor6.getPrice());
+            System.out.println("4 - " + armor4.getName()+ ", agilidade para uso " + armor4.getConstForUse() + "\n" + armor4.getPrice());
+            System.out.println("5 - " + armor5.getName()+ ", agilidade para uso " + armor5.getConstForUse() + "\n" + armor5.getPrice());
+            System.out.println("6 - " + armor6.getName()+ ", agilidade para uso " + armor6.getConstForUse() + "\n" + armor6.getPrice());
             System.out.print("Digite o número correspondente à sua escolha: ");
             InputReader sc = new InputReader();
 
@@ -567,12 +569,12 @@ public class View {
         while (currentPlayer.getCharacter().getWeapon() == null) {
             System.out.println("============== WEAPONS ISAAC ==============");
             System.out.println("Escolha sua arma de aventureiro:");
-            System.out.println("1 - " + weapon1.getName() + weapon1.isHeavy() + "\n" + weapon1.getPrice());
-            System.out.println("2 - " + weapon2.getName() + weapon2.isHeavy() + "\n" + weapon2.getPrice());
-            System.out.println("3 - " + weapon3.getName() + weapon3.isHeavy() + "\n" + weapon3.getPrice());
-            System.out.println("4 - " + weapon3.getName() + weapon4.isHeavy() + "\n" + weapon4.getPrice());
-            System.out.println("5 - " + weapon3.getName() + weapon5.isHeavy() + "\n" + weapon5.getPrice());
-            System.out.println("6 - " + weapon3.getName() + weapon6.isHeavy() + "\n" + weapon6.getPrice());
+            System.out.println("1 - " + weapon1.getName() + "\n" + weapon1.getPrice());
+            System.out.println("2 - " + weapon2.getName() + "\n" + weapon2.getPrice());
+            System.out.println("3 - " + weapon3.getName() + "\n" + weapon3.getPrice());
+            System.out.println("4 - " + weapon3.getName() + "\n" + weapon4.getPrice());
+            System.out.println("5 - " + weapon3.getName() + "\n" + weapon5.getPrice());
+            System.out.println("6 - " + weapon3.getName() + "\n" + weapon6.getPrice());
             System.out.print("Digite o número correspondente à sua escolha: ");
             InputReader sc = new InputReader();
 
