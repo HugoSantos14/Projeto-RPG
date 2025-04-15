@@ -2,9 +2,11 @@ package model.game;
 
 import model.entities.Character;
 import model.enums.MonsterType;
+import utils.InputReader;
 import utils.datastructures.LinkedList;
 import utils.datastructures.Queue;
 import utils.datastructures.Stack;
+import view.View;
 import model.entities.Entity;
 
 import java.util.Random;
@@ -72,16 +74,31 @@ public class Battle {
         return ranking;
     }
 
-    public void playTurn() {
-        for (int i = 0; i < turns.size(); i++) {
-            Entity entityInTurn = turns.dequeue();
-    
-            // Aqui o entityInTurn vai ser colocado para escolher o que fazer no turno atual
-    
-            if (entityInTurn.isAlive()) {
-                turns.enqueue(entityInTurn);
+    public void playTurn(View view) {
+        if (turns.isEmpty()) {
+            return;
+        }
+
+        int participantsInTurn = turns.size();
+
+        for (int i = 0; i < participantsInTurn; i++) {
+            Entity currentEntity = turns.dequeue();
+
+            if (!currentEntity.isAlive()) {
+                ranking.push(currentEntity);
+                continue;
+            }
+
+            if (currentEntity instanceof Character) {
+                view.playerTurn(currentEntity, this);
             } else {
-                ranking.push(entityInTurn);
+                view.monsterTurn(view.getCurrentPlayer(), currentEntity);
+            }
+
+            if (currentEntity.isAlive()) {
+                turns.enqueue(currentEntity);
+            } else {
+                ranking.push(currentEntity);
             }
         }
         turnCounter++;

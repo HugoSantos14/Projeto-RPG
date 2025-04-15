@@ -70,16 +70,16 @@ public abstract class Entity {
         this.estusFlasks = estusFlasks;
     }
 
+    public int getDefense() {
+        return 0;
+    }
+
     public void takeDamage(int damage) {
         if (hp - damage < 0) {
             hp = 0;
         } else {
             hp -= damage;
         }
-    }
-
-    public void useSkill(int skillId, Entity target) {
-
     }
 
     // O jogador escolhe quantos frascos de cura ele quer usar.

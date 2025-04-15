@@ -22,6 +22,10 @@ public class View {
     private static final PlayerService ps = new PlayerService();
     private static final CharacterService cs = new CharacterService();
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void run() {
         while (true) {
             System.out.println("\n===== INÍCIO =====");
@@ -166,7 +170,7 @@ public class View {
             if (winner != null) {
                 battle.showRanking();
             } else {
-                battle.playTurn();
+                battle.playTurn(this);
             }
         }
     }
@@ -372,34 +376,25 @@ public class View {
         }
     }
 
-    private void PlayerTurn(Character p1, Monster p2) {
-
-        System.out.println("==============================");
-        System.out.println("       TURN OF " + p1.getName());
-        System.out.println("==============================\n");
-        //to string player
-        //to string enemy
-        System.out.println("==============================");
-
-        System.out.println("Escolha uma ação:");
+    public void playerTurn(Entity player, Battle battle) {
+        System.out.println("\n===== SEU TURNO: " + player.getName() + " =====");
         System.out.println("1. Atacar");
-        System.out.println("2. Usar Skill");
-        System.out.println("3. Usar poção");
-        System.out.print("Opção: ");
-
-        String opcao = sc.nextLine();
-
-        switch(opcao) {
-            case "1":
-                if (p2.getDefense() > p1.attack()){
-                    System.out.println("Perfect defense! No damage to " + p2.getName());
-                } else {
-                    System.out.println("Damage to " + p2.getName()  + "is " + p1.attack());
-                    p2.setHp(p1.attack() - p2.getDefense() + p2.getHp());
-                    System.out.println("Actual Hp to "+ p2.getName() + "is " + p2.getHp());
+        System.out.println("2. Usar Habilidade");
+        System.out.println("3. Usar Poção");
+        System.out.print("Escolha: ");
+    
+        switch(sc.nextInt()) {
+            case 1:
+                Entity target = chooseTarget(battle);
+                if (target != null) {
+                    int damage = player.attack();
+                    int defense = target.getDefense();
+                    int causedDamage = Math.max(0, damage - defense);
+                    target.takeDamage(causedDamage);
+                    System.out.println(player.getName() + " atacou " + target.getName() + " causando " + causedDamage + " de dano!");
                 }
                 break;
-            case "2":
+            case 2:
                 // if(p1.getCurrentSkill().temUsos()){
                 //     if(p1.getCurrentSkill().getDamage() < p2.getDefense()){
                 //         System.out.println("Perfect defense! No damage to " + p2.getName());
@@ -407,20 +402,63 @@ public class View {
                 //         p2.setHp( p2.getHp() - p1.getCurrentSkill().getDamage() + p2.getDefense());
                 //     }
                 // }
-            case "3":
-                System.out.println("How many estus you want to use? you have " + p1.getEstusFlasks());
+                break;
+            case 3:
+                System.out.println("Quantos frascos de Estus você quer usar? você tem " + player.getEstusFlasks());
                 int estusFlasks = sc.nextInt();
 
-                if(p1.getEstusFlasks() < estusFlasks) {
-                    System.out.println("You cant use estus flaks!");
+                if(player.getEstusFlasks() < estusFlasks) {
+                    System.out.println("Não pode usar!");
                 } else {
-                    System.out.println("You used " + estusFlasks + " flaks!");
-                    System.out.println("You have now " + p1.getEstusFlasks() + " flaks!");
-                    p1.heal(estusFlasks);
+                    System.out.println("Você usou " + estusFlasks + " frascos!");
+                    System.out.println("Agora você tem " + player.getEstusFlasks() + " flaks!");
+                    player.heal(estusFlasks);
                 }
                 break;
             default:
                 System.out.println("Turno perdido por sua indecisão!");
+                break;
+        }
+    }
+
+    private Entity chooseTarget(Battle battle) {
+        System.out.println("\nEscolha um alvo:");
+        int index = 1;
+        for (Entity entity : battle.getTurns()) {
+            if (entity.isAlive()) {
+                System.out.println(index++ + ". " + entity.getName() + " (HP: " + entity.getHp() + "/" + entity.getMaxHp() +")");
+            }
+        }
+        System.out.print("Escolha:\n-> ");
+        int choice = sc.nextInt() - 1;
+        return battle.getTurns().get(choice);
+    }
+
+    public void monsterTurn(Player p1, Entity m) {
+        Random rand = new Random();
+        System.out.println("==============================");
+        System.out.println("       TURN OF MONSTER");
+        System.out.println("==============================\n");
+
+        switch (rand.nextInt(3) + 1) {
+            case 1:
+                if(p1.getCharacter().getArmor().getBaseDefense() > m.attack()){
+                    System.out.println("Perfect defense! No damage to " + p1.getUsername());
+                } else {
+                    System.out.println("Damage to " + m.getName() + "is " + m.attack());
+                    p1.getCharacter().setHp(p1.getCharacter().getHp() + p1.getCharacter().getArmor().getBaseDefense() - m.attack());
+                    System.out.println("Actual hp " + p1.getCharacter().getName() + "is " + p1.getCharacter().getHp());
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+                if(m.getEstusFlasks() < 0){
+                    System.out.println(m.getName()+" cant use estus flaks!");
+                } else {
+                    m.heal(1);
+                }
                 break;
         }
     }
@@ -507,35 +545,6 @@ public class View {
 //        //Adicionar o reset do dano base da arma apos uso da skill
 //        //Adicionar o reset de defesa base da armadura apos o uso da skill
 //    }
-
-    private void EnemyTurn(Player p1, Monster m) {
-        Random rand = new Random();
-        System.out.println("==============================");
-        System.out.println("       TURN OF MONSTER");
-        System.out.println("==============================\n");
-
-        switch (rand.nextInt(3) + 1) {
-            case 1:
-                if(p1.getCharacter().getArmor().getBaseDefense() > m.attack()){
-                    System.out.println("Perfect defense! No damage to " + p1.getUsername());
-                } else {
-                    System.out.println("Damage to " + m.getName() + "is " + m.attack());
-                    p1.getCharacter().setHp(p1.getCharacter().getHp() + p1.getCharacter().getArmor().getBaseDefense() - m.attack());
-                    System.out.println("Actual hp " + p1.getCharacter().getName() + "is " + p1.getCharacter().getHp());
-                }
-                break;
-            case 2:
-
-                break;
-            case 3:
-                if(m.getEstusFlasks() < 0){
-                    System.out.println(m.getName()+" cant use estus flaks!");
-                } else {
-                    m.heal(1);
-                }
-                break;
-        }
-    }
 
     public void configCharacter() {
 

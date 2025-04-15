@@ -1,6 +1,9 @@
 package utils.datastructures;
 
-public class Queue<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class Queue<E> implements Iterable<E> {
 
     private Node<E> head;
     private Node<E> tail;
@@ -58,17 +61,14 @@ public class Queue<E> {
         }
 
         StringBuilder result = new StringBuilder();
-        Queue<E> temp = new Queue<>(capacity);
-        while (!isEmpty()) {
-            result.append(peek());
+        Node<E> current = head;
+        int count = 1;
+        while (current != null) {
+            result.append(count++).append(" - ").append(current.getData());
             if (head.getNext() != null) {
-                result.append(", ");
+                result.append("\n");
             }
-            temp.enqueue(dequeue());
-        }
-
-        while (!temp.isEmpty()) {
-            enqueue(temp.dequeue());
+            current = current.getNext();
         }
 
         return result.toString();
@@ -111,5 +111,50 @@ public class Queue<E> {
             return null;
         }
         return head.getData();
+    }
+
+    public E get(int index) {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("Fila vazia");
+        } else if (index > size - 1 || index < 0) {
+            throw new IndexOutOfBoundsException("Índice " + index + " não encontrado");
+        } else if (index == 0) {
+            return head.getData();
+        } else if (index == size - 1) {
+            return tail.getData();
+        }
+
+        Node<E> current = head;
+        int count = 0;
+        while (current != null && count < index) {
+            current = current.getNext();
+            count++;
+        }
+
+        assert current != null;
+        return current.getData();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new QueueIterator();
+    }
+
+    private class QueueIterator implements Iterator<E> {
+        private Node<E> current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            final E data = current.getData();
+            current = current.getNext();
+            return data;
+        }
     }
 }
