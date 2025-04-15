@@ -1,7 +1,6 @@
 package model.game;
 
 import model.entities.Character;
-import model.entities.Monster;
 import model.enums.MonsterType;
 import utils.datastructures.LinkedList;
 import utils.datastructures.Queue;
@@ -16,8 +15,8 @@ public class Battle {
     private int turnCounter;
     private boolean running;
 
-    private final Queue<Entity> turns = new Queue<>();
-    private final Stack<Entity> ranking = new Stack<>();
+    private final Queue<Entity> turns;
+    private final Stack<Entity> ranking;
 
     public Battle(Character character) {
         LinkedList<Entity> participants = new LinkedList<>();
@@ -31,6 +30,8 @@ public class Battle {
         }
 
         participants = sortByAgility(participants);
+        turns = new Queue<>(participants.size());
+        ranking = new Stack<>(participants.size());
 
         for (Entity e : participants) {
             turns.enqueue(e);
@@ -72,26 +73,33 @@ public class Battle {
     }
 
     public void playTurn() {
-        Entity entityInTurn = turns.dequeue();
-
-        // Incompleto
-
-        if (entityInTurn.isAlive()) {
-            turns.enqueue(entityInTurn);
-        } else {
-            ranking.push(entityInTurn);
+        for (int i = 0; i < turns.size(); i++) {
+            Entity entityInTurn = turns.dequeue();
+    
+            // Aqui o entityInTurn vai ser colocado para escolher o que fazer no turno atual
+    
+            if (entityInTurn.isAlive()) {
+                turns.enqueue(entityInTurn);
+            } else {
+                ranking.push(entityInTurn);
+            }
         }
         turnCounter++;
     }
 
-    public boolean verifyWinner() {
+    public Entity verifyWinner() {
         if (turns.size() == 1) {
+            ranking.push(turns.peek());
             running = false;
             System.out.println("===== FIM DA LUTA =====");
-            System.out.println(ranking);
-            return true;
+            System.out.println("===== O VENCEDOR É: " + ranking.peek().getName() + " =====");
+            return ranking.peek();
         }
-        return false;
+        return null;
+    }
+
+    public void showRanking() {
+        System.out.println(ranking);
     }
 
     private LinkedList<Entity> sortByAgility(LinkedList<Entity> list) {

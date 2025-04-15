@@ -1,6 +1,7 @@
 package view;
 
 import model.entities.Character;
+import model.entities.Entity;
 import model.entities.Monster;
 import model.entities.Player;
 import model.game.Armor;
@@ -55,7 +56,7 @@ public class View {
 
             if (currentPlayer != null) {
                 System.out.println("Você entrou como " + currentPlayer.getUsername());
-                mainScreen();
+                mainMenu();
                 break;
             } else {
                 System.err.println("Usuário ou senha incorretos.");
@@ -83,13 +84,13 @@ public class View {
             } else {
                 ps.create(currentPlayer);
                 System.out.println("Usuário " + currentPlayer.getUsername() + " cadastrado com sucesso!");
-                mainScreen();
+                mainMenu();
                 break;
             }
         }
     }
 
-    public void mainScreen() {
+    public void mainMenu() {
         while (true) {
             System.out.println("\n===== SEJA BEM-VINDO(A), " + currentPlayer.getUsername().toUpperCase() + "! =====");
             System.out.println("1. Jogar");
@@ -98,7 +99,7 @@ public class View {
             System.out.print("-> ");
             switch (sc.nextInt()) {
                 case 1:
-                    // Batalha
+                    startBattle(new Battle(currentPlayer.getCharacter()));
                     break;
                 case 2:
                     showCharacter(currentPlayer.getCharacter());
@@ -159,8 +160,15 @@ public class View {
         }
     }
 
-    public void battleScreen(Battle battle) {
-
+    public void startBattle(Battle battle) {
+        while (battle.isRunning()) {
+            Entity winner = battle.verifyWinner();
+            if (winner != null) {
+                battle.showRanking();
+            } else {
+                battle.playTurn();
+            }
+        }
     }
 
     public void setSkillOnPlayer(Skill skill1, Skill skill2, Skill skill3 , Skill skill4 , Skill skill5 , Skill skill6) {
@@ -392,13 +400,13 @@ public class View {
                 }
                 break;
             case "2":
-                if(p1.getCurrentSkill().temUsos()){
-                    if(p1.getCurrentSkill().getDamage() < p2.getDefense()){
-                        System.out.println("Perfect defense! No damage to " + p2.getName());
-                    } else {
-                        p2.setHp( p2.getHp() - p1.getCurrentSkill().getDamage() + p2.getDefense());
-                    }
-                }
+                // if(p1.getCurrentSkill().temUsos()){
+                //     if(p1.getCurrentSkill().getDamage() < p2.getDefense()){
+                //         System.out.println("Perfect defense! No damage to " + p2.getName());
+                //     } else {
+                //         p2.setHp( p2.getHp() - p1.getCurrentSkill().getDamage() + p2.getDefense());
+                //     }
+                // }
             case "3":
                 System.out.println("How many estus you want to use? you have " + p1.getEstusFlasks());
                 int estusFlasks = sc.nextInt();

@@ -50,13 +50,13 @@ public class Stack<E> {
 
         StringBuilder result = new StringBuilder();
         Stack<E> temp = new Stack<>(capacity);
-        int count = size;
+        int count = 1;
         while (!isEmpty()) {
+            result.append(count++).append(" - ").append(head.getData()).append("\n");
             temp.push(pop());
         }
 
         while (!temp.isEmpty()) {
-            result.append(count--).append(" - ").append(temp.getHead()).append("\n");
             push(temp.pop());
         }
 
