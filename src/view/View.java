@@ -11,7 +11,9 @@ import model.game.Weapon;
 import services.CharacterService;
 import services.PlayerService;
 import utils.InputReader;
+import utils.datastructures.LinkedList;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 // TELAS DO JOGO
@@ -104,7 +106,10 @@ public class View {
             System.out.println("1. Jogar");
             System.out.println("2. Ver personagem");
             System.out.println("3. Level up");
-            System.out.println("4. Sair");
+            System.out.println("4. Loja armas");
+            System.out.println("5. Loja Skills");
+            System.out.println("6. Loja armaduras");
+            System.out.println("7. Sair");
             System.out.print("-> ");
             switch (sc.nextInt()) {
                 case 1:
@@ -117,15 +122,26 @@ public class View {
                     if(currentPlayer.getCharacter().getRewardPoints() < 0) {
                         System.out.println("Você não tem pontos para aumentar seus atributos!");
                     } else {
-                        characterConfiguration(currentPlayer.getCharacter().getRewardPoints());
+                        characterConfiguration(currentPlayer.getCharacter());
                     }
                 case 4:
+                    setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);
+                    break;
+                case 5:
+                    setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
+                    break;
+                case 6:
+                    setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
+                    break;
+                case 7:
                     System.out.println("Deseja sair da conta? (S/N)");
                     System.out.print("-> ");
                     if (sc.nextBoolean()) {
                         ps.update(currentPlayer);
                         return;
                     }
+                    break;
+                default:
                     break;
             }
         }
@@ -134,6 +150,7 @@ public class View {
     public void showCharacter(Character character) {
         System.out.println("\n=== STATUS DO PERSONAGEM ===");
         System.out.println("Nome: " + character.getName());
+        System.out.println("Vida: " + character.getMaxHp());
         System.out.println("Nível: " + character.getLevel());
         System.out.printf("XP: %d/%d\n", character.getExperience(), character.getNextLevelExp());
         System.out.println("Pontos disponíveis: " + character.getRewardPoints());
@@ -147,12 +164,12 @@ public class View {
         //printar todas as skills
     }
 
-    public void characterConfiguration(int rewardpoints) {
-        while (rewardpoints > 0) {
+    public void characterConfiguration(Character p1) {
+        while (p1.getRewardPoints() > 0) {
             System.out.println("\n==============================");
             System.out.println("    DISTRIBUIÇÃO DE ATRIBUTOS    ");
             System.out.println("==============================");
-            System.out.printf("Pontos restantes: %d\n", rewardpoints);
+            System.out.printf("Pontos restantes: %d\n", p1.getRewardPoints());
             System.out.println("\nAtributos:");
             System.out.printf("1. Strenght      : %d\n", currentPlayer.getCharacter().getStrength());
             System.out.printf("2. Dexterity     : %d\n", currentPlayer.getCharacter().getDexterity());
@@ -163,15 +180,15 @@ public class View {
             switch (sc.nextInt()) {
                 case 1:
                     currentPlayer.getCharacter().setStrength(currentPlayer.getCharacter().getStrength() + 1);
-                    rewardpoints--;
+                    p1.setRewardPoints(p1.getRewardPoints() - 1);
                     break;
                 case 2:
                     currentPlayer.getCharacter().setDexterity(currentPlayer.getCharacter().getDexterity() + 1);
-                    rewardpoints--;
+                    p1.setRewardPoints(p1.getRewardPoints() - 1);
                     break;
                 case 3:
                     currentPlayer.getCharacter().setAgility(currentPlayer.getCharacter().getAgility() + 1);
-                    rewardpoints--;
+                    p1.setRewardPoints(p1.getRewardPoints() - 1);
                     break;
                 default:
                     System.out.println("Não Existe esse atributo!");
@@ -181,12 +198,24 @@ public class View {
     }
 
     public void startBattle(Battle battle) {
+        System.out.println("\n===== BATALHA INICIADA =====");
+
         while (battle.isRunning()) {
+            System.out.println("\n--- Turno " + (battle.getTurnCounter() + 1) + " ---");
+
+            // Executa o turno
+            battle.playTurn(this);
+
+            // Verifica se há um vencedor após cada turno
             Entity winner = battle.verifyWinner();
             if (winner != null) {
-                battle.showRanking();
-            } else {
-                battle.playTurn(this);
+                System.out.println("\n===== FIM DA BATALHA =====");
+                System.out.println("Vencedor: " + winner.getName());
+                if (winner instanceof Character) {
+                    int xpGained = battle.calculateXp(battle.getRanking());
+                    System.out.println("Você ganhou " + xpGained + " de experiência!");
+                }
+                return;
             }
         }
     }
@@ -398,7 +427,7 @@ public class View {
         System.out.println("2. Usar Habilidade");
         System.out.println("3. Usar Poção");
         System.out.print("Escolha: ");
-    
+
         switch(sc.nextInt()) {
             case 1:
                 Entity target = chooseTarget(battle);
@@ -407,7 +436,8 @@ public class View {
                     int defense = target.getDefense();
                     int causedDamage = Math.max(0, damage - defense);
                     target.takeDamage(causedDamage);
-                    System.out.println(player.getName() + " atacou " + target.getName() + " causando " + causedDamage + " de dano!");
+                    System.out.println(player.getName() + " atacou " +
+                            target.getName() + " causando " + causedDamage + " de dano!");
                 }
                 break;
             case 2:
@@ -438,42 +468,64 @@ public class View {
     }
 
     private Entity chooseTarget(Battle battle) {
-        System.out.println("\nEscolha um alvo:");
+        LinkedList<Entity> aliveEnemies = new LinkedList<>();
         int index = 1;
+
+        System.out.println("\nEscolha um alvo:");
         for (Entity entity : battle.getTurns()) {
-            if (entity.isAlive()) {
-                System.out.println(index++ + ". " + entity.getName() + " (HP: " + entity.getHp() + "/" + entity.getMaxHp() +")");
+            if (entity.isAlive() && !(entity instanceof Character)) {
+                System.out.println(index + ". " + entity.getName() +
+                        " (HP: " + entity.getHp() + "/" + entity.getMaxHp() + ")");
+                aliveEnemies.add(entity);
+                index++;
             }
         }
+
+        if (aliveEnemies.isEmpty()) {
+            System.out.println("Nenhum inimigo disponível!");
+            return null;
+        }
+
         System.out.print("Escolha:\n-> ");
         int choice = sc.nextInt() - 1;
-        return battle.getTurns().get(choice);
+
+        if (choice >= 0 && choice < aliveEnemies.size()) {
+            return aliveEnemies.get(choice);
+        } else {
+            System.out.println("Alvo inválido! Atacando o primeiro inimigo.");
+            return aliveEnemies.get(0);
+        }
     }
 
-    public void monsterTurn(Player p1, Entity m) {
-        Random rand = new Random();
+    public void monsterTurn(Player player, Entity monster) {
         System.out.println("==============================");
-        System.out.println("       TURN OF MONSTER");
+        System.out.println("       TURNO DE " + monster.getName().toUpperCase());
         System.out.println("==============================\n");
 
-        switch (rand.nextInt(3) + 1) {
-            case 1:
-                if(p1.getCharacter().getArmor().getBaseDefense() > m.attack()){
-                    System.out.println("Perfect defense! No damage to " + p1.getUsername());
-                } else {
-                    System.out.println("Damage to " + m.getName() + "is " + m.attack());
-                    p1.getCharacter().setHp(p1.getCharacter().getHp() + p1.getCharacter().getArmor().getBaseDefense() - m.attack());
-                    System.out.println("Actual hp " + p1.getCharacter().getName() + "is " + p1.getCharacter().getHp());
-                }
-                break;
-            case 2:
+        if (!monster.isAlive()) return;
 
+        Random rand = new Random();
+        int action = rand.nextInt(3) + 1;
+
+        switch (action) {
+            case 1:
+                int damage = monster.attack();
+                int defense = player.getCharacter().getArmor().getBaseDefense();
+                int finalDamage = Math.max(0, damage - defense);
+
+                player.getCharacter().takeDamage(finalDamage);
+                System.out.println(monster.getName() + " atacou causando " +
+                        finalDamage + " de dano!");
+                System.out.println("HP atual: " + player.getCharacter().getHp());
                 break;
+
+            case 2:
+                break;
+
             case 3:
-                if(m.getEstusFlasks() < 0){
-                    System.out.println(m.getName()+" cant use estus flaks!");
-                } else {
-                    m.heal(1);
+                if (monster.getEstusFlasks() > 0) {
+                    monster.heal(1);
+                    System.out.println(monster.getName() + " usou uma poção de cura!");
                 }
                 break;
         }
@@ -567,7 +619,8 @@ public class View {
         setName();
 
         while(true) {
-            characterConfiguration(currentPlayer.getCharacter().getRewardPoints());
+
+            characterConfiguration(currentPlayer.getCharacter());
             setSkillOnPlayer(Skill.BOLADEFOGO, Skill.CORTEFLAMEJANTE, Skill.NEVASCA, Skill.TIROPRECISO, Skill.TERREMOTO, Skill.CORTECRITICO);
             setArmorOnPlayer(Armor.ROUPACOURO, Armor.CABECABALDE, Armor.ARMADURAFERRO, Armor.ARMADURAACO, Armor.ARMADURAOBSIDIANA, Armor.ARMADURANETHERITA);
             setWeaponOnPlayer(Weapon.MARTELOQUEBRADO, Weapon.ESPADAQUEBRADA, Weapon.GREATSWORD, Weapon.SABER, Weapon.DRAGONKILLER, Weapon.UCHIGATANA);

@@ -1,6 +1,7 @@
 package utils.datastructures;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Stack<E> implements Iterable<E> {
 
@@ -95,8 +96,29 @@ public class Stack<E> implements Iterable<E> {
         return head.getData();
     }
 
-    private class StackIterator implements Iterator<E> {
-        private Node<E> current = head;
+    @Override
+    public Iterator<E> iterator() {
+        return new StackIterator();
+    }
 
+    private class StackIterator implements Iterator<E> {
+        private Node<E> current;
+        private final Stack<E> temp = new Stack<>(capacity);
+
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            final E data = current.getData();
+            current = current.getNext();
+            return data;
+        }
     }
 }

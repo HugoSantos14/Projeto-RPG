@@ -105,7 +105,7 @@ public class Battle {
         turnCounter++;
     }
 
-    private int calculateXp(LinkedList<Entity> enemies) {
+    public int calculateXp(Stack<Entity> enemies) {
         int total = 0;
         for (Entity enemy : enemies) {
             total += enemy.getLevel() * 10;
@@ -114,21 +114,31 @@ public class Battle {
     }
 
     public Entity verifyWinner() {
-        if (turns.size() == 1) {
-            Entity winner = turns.peek();
-            ranking.push(winner);
-            running = false;
-            System.out.println("===== FIM DA LUTA =====");
-            System.out.println("===== O VENCEDOR É: " + ranking.peek().getName() + " =====");
+        // Conta quantos participantes ainda estão vivos
+        int aliveCount = 0;
+        Entity lastAlive = null;
 
-            if (winner instanceof Character) {
-                int xpGained = calculateXp(battle.getEnemies());
-                currentPlayer.getCharacter().addExperience(xpGained);
-                System.out.println("\nVocê ganhou " + xpGained + " pontos de experiência!");
+        for (Entity entity : turns) {
+            if (entity.isAlive()) {
+                aliveCount++;
+                lastAlive = entity;
             }
-
-            return ranking.peek();
         }
+
+        // Se só restar 1, é o vencedor
+        if (aliveCount == 1) {
+            running = false;
+            ranking.push(lastAlive);
+            return lastAlive;
+        }
+
+        // Se todos morreram (empate)
+        if (aliveCount == 0) {
+            running = false;
+            return null;
+        }
+
+        // Batalha continua
         return null;
     }
 

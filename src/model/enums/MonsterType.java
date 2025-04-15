@@ -3,10 +3,10 @@ package model.enums;
 import model.entities.Monster;
 
 public enum MonsterType {
-    GOBLIN("Goblin", 0, 0, 0, 0),
-    SLIME("Slime", 0, 0, 0, 0),
-    ORC("Orc", 0, 0, 0, 0),
-    DRAGON("Dragon", 0, 0, 0, 0);
+    GOBLIN("Goblin", 20, 5, 10, 0),
+    SLIME("Slime", 40, 5, 10, 0),
+    ORC("Orc", 80, 10, 10, 0),
+    DRAGON("Dragon", 160, 10, 10, 0);
 
     private final String name;
     private final int maxHp;

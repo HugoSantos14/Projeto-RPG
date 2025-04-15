@@ -23,7 +23,7 @@ public class Character extends Entity {
     private Armor armor;
 
     public Character(String name, int id, Armor armor, Weapon weapon) {
-        super(name);
+        super(name, 30);
         this.id = id;
         this.armor = armor;
         this.weapon = weapon;
@@ -60,6 +60,8 @@ public class Character extends Entity {
         setLevel(getLevel() + 1);
         experience -= nextLevelExp;
         nextLevelExp = (int)(nextLevelExp * 1.5); // Aumenta a XP necessária
+        Random dice = new Random();
+        setMaxHp(getMaxHp() + dice.nextInt(6) + 3 + dice.nextInt(6) + dice.nextInt(6));
         rewardPoints += 3; // Pontos para distribuir
         System.out.println("\n=== LEVEL UP! ===");
         System.out.println("Você alcançou o nível " + getLevel() + "!");
