@@ -1,0 +1,25 @@
+{
+  "1": {
+    "id": 1,
+    "username": "Hugo",
+    "password": "hugo123",
+    "runes": 10000000,
+    "character": {
+      "id": 0,
+      "skills": {
+        "size": 0
+      },
+      "experience": 0,
+      "nextLevelExp": 100,
+      "rewardPoints": 20,
+      "strength": 0,
+      "dexterity": 0,
+      "name": "",
+      "level": 0,
+      "hp": 30,
+      "maxHp": 30,
+      "agility": 0,
+      "estusFlasks": 3
+    }
+  }
+}
