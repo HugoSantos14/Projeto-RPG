@@ -2,13 +2,11 @@ package view;
 
 import model.entities.Character;
 import model.entities.Entity;
-import model.entities.Monster;
 import model.entities.Player;
 import model.game.Armor;
 import model.game.Battle;
 import model.game.Skill;
 import model.game.Weapon;
-import services.CharacterService;
 import services.PlayerService;
 import utils.InputReader;
 import utils.datastructures.LinkedList;
@@ -22,7 +20,6 @@ public class View {
     private Player currentPlayer = new Player("Master", "1234"); // Jogador que está logado atualmente!
     private static final InputReader sc = new InputReader();
     private static final PlayerService ps = new PlayerService();
-    private static final CharacterService cs = new CharacterService();
 
     public Player getCurrentPlayer() {
         return currentPlayer;
@@ -94,7 +91,6 @@ public class View {
                 ps.create(currentPlayer);
                 System.out.println("Usuário " + currentPlayer.getUsername() + " cadastrado com sucesso!");
                 configCharacter();
-                mainMenu();
                 break;
             }
         }
@@ -117,7 +113,11 @@ public class View {
                     resetAfterBattle(currentPlayer.getCharacter());
                     break;
                 case 2:
-                    showCharacter(currentPlayer.getCharacter());
+                    if (currentPlayer.getCharacter() != null) {
+                        showCharacter(currentPlayer.getCharacter());
+                    } else {
+                        configCharacter();
+                    }
                     break;
                 case 3:
                     if(currentPlayer.getCharacter().getRewardPoints() < 0) {
@@ -667,6 +667,7 @@ public class View {
             switch (sc.nextInt()) {
                 case 1:
                     System.out.println("Good luck on your adventures!");
+                    mainMenu();
                     return;
                 case 2:
                     System.out.println("Let's try again!");
