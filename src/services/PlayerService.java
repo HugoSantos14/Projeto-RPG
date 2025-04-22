@@ -30,10 +30,7 @@ public class PlayerService {
     }
 
     private void savePlayers() {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PLAYERS_JSON_FILE))) {
             gson.toJson(players, writer);
         } catch (IOException e) {

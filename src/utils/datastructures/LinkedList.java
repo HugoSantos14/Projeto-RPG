@@ -22,41 +22,18 @@ public class LinkedList<E> implements Iterable<E> {
         }
     }
 
-    public boolean contains(E data) {
-        if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
-        }
-
-        Node<E> current = head;
-        while (current != null && !current.getData().equals(data)) {
-            current = current.getNext();
-        }
-
-        return current != null;
+    public E getFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Lista vazia");
+        return head.data;
     }
 
-    public Node<E> getHead() {
-        return head;
+    public E getLast() {
+        if (isEmpty()) throw new NoSuchElementException("Lista vazia");
+        return tail.data;
     }
-
-    public void setHead(Node<E> head) {
-        this.head = head;
-    }
-
-    public Node<E> getTail() {
-        return tail;
-    }
-
-    public void setTail(Node<E> tail) {
-        this.tail = tail;
-    }
-
+    
     public int size() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public boolean isEmpty() {
@@ -74,7 +51,7 @@ public class LinkedList<E> implements Iterable<E> {
         int counter = 1;
         while (current != null) {
             result.append(counter++).append(" - ").append(current);
-            current = current.getNext();
+            current = current.next;
         }
         
         return result.toString();
@@ -86,8 +63,8 @@ public class LinkedList<E> implements Iterable<E> {
         if (head == null) {
             tail = newNode;
         } else {
-            newNode.setNext(head);
-            head.setPrev(newNode);
+            newNode.next = head;
+            head.prev = newNode;
         }
         head = newNode;
         size++;
@@ -99,8 +76,8 @@ public class LinkedList<E> implements Iterable<E> {
         if (tail == null) {
             head = newNode;
         } else {
-            tail.setNext(newNode);
-            newNode.setPrev(tail);
+            tail.next = newNode;
+            newNode.prev = tail;
         }
         tail = newNode;
         size++;
@@ -108,11 +85,11 @@ public class LinkedList<E> implements Iterable<E> {
 
     public void add(E data, int index) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+            throw new IndexOutOfBoundsException("Índice " + index + " não encontrado");
         } else if (index == 0) {
             addFirst(data);
             return;
-        } else if (index == size - 1) {
+        } else if (index == size) {
             add(data);
             return;
         }
@@ -120,22 +97,22 @@ public class LinkedList<E> implements Iterable<E> {
         Node<E> current = head;
         int count = 0;
         while (current != null && count < index) {
-            current = current.getNext();
+            current = current.next;
             count++;
         }
 
         assert current != null;
         final Node<E> newNode = new Node<>(data);
-        newNode.setNext(current);
-        newNode.setPrev(current.getPrev());
-        current.getPrev().setNext(newNode);
-        current.setPrev(newNode);
+        newNode.next = current;
+        newNode.prev = current.prev;
+        current.prev.next = newNode;
+        current.prev = newNode;
         size++;
     }
 
     public void removeFirst() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
+            throw new NoSuchElementException("Lista vazia");
         }
 
         if (head == tail) {
@@ -143,16 +120,16 @@ public class LinkedList<E> implements Iterable<E> {
             tail = null;
         } else {
             Node<E> temp = head;
-            head = head.getNext();
-            head.setPrev(null);
-            temp.setNext(null);
+            head = head.next;
+            head.prev = null;
+            temp.next = null;
         }
         size--;
     }
 
     public void removeLast() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
+            throw new NoSuchElementException("Lista vazia");
         }
 
         if (head == tail) {
@@ -160,18 +137,18 @@ public class LinkedList<E> implements Iterable<E> {
             tail = null;
         } else {
             Node<E> temp = tail;
-            tail = tail.getPrev();
-            tail.setNext(null);
-            temp.setPrev(null);
+            tail = tail.prev;
+            tail.next = null;
+            temp.prev = null;
         }
         size--;
     }
 
     public void remove(int index) {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
+            throw new NoSuchElementException("Lista vazia");
         } else if (index > size - 1 || index < 0) {
-            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+            throw new IndexOutOfBoundsException("Índice " + index + " não encontrado");
         } else if (index == 0) {
             removeFirst();
             return;
@@ -180,55 +157,68 @@ public class LinkedList<E> implements Iterable<E> {
             return;
         }
 
-        Node<E> current = head;
+        Node<E> removed = head;
         int count = 0;
-        while (current != null && count < index) {
-            current = current.getNext();
+        while (removed != null && count < index) {
+            removed = removed.next;
             count++;
         }
 
-        assert current != null;
-        current.getPrev().setNext(current.getNext());
-        current.getNext().setPrev(current.getPrev());
-        current.setPrev(null);
-        current.setNext(null);
+        assert removed != null;
+        removed.prev.next = removed.next;
+        removed.next.prev = removed.prev;
+        removed.prev = null;
+        removed.next = null;
         size--;
     }
 
     public E get(int index) {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
+            throw new NoSuchElementException("Lista vazia");
         } else if (index > size - 1 || index < 0 ) {
-            throw new IndexOutOfBoundsException("Index " + index + " não encontrado");
+            throw new IndexOutOfBoundsException("Índice " + index + " não encontrado");
         } else if (index == 0) {
-            return head.getData();
+            return head.data;
         } else if (index == size - 1) {
-            return tail.getData();
+            return tail.data;
         }
 
         Node<E> current = head;
         int count = 0;
         while (current != null && count < index) {
-            current = current.getNext();
+            current = current.next;
             count++;
         }
 
         assert current != null;
-        return current.getData();
+        return current.data;
     }
 
     public int indexOf(E data) {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Lista vazia");
+            throw new NoSuchElementException("Lista vazia");
         }
 
-        int count = 0;
+        int index = 0;
         Node<E> current = head;
-        while (current != null && !current.getData().equals(data)) {
-            current = current.getNext();
-            count++;
+        while (current != null && !current.data.equals(data)) {
+            current = current.next;
+            index++;
         }
-        return count;
+        return index;
+    }
+
+    public boolean contains(E data) {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Lista vazia");
+        }
+
+        Node<E> current = head;
+        while (current != null && !current.data.equals(data)) {
+            current = current.next;
+        }
+
+        return current != null;
     }
 
     @Override
@@ -247,11 +237,26 @@ public class LinkedList<E> implements Iterable<E> {
         @Override
         public E next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("Lista vazia");
             }
-            final E data = current.getData();
-            current = current.getNext();
+            final E data = current.data;
+            current = current.next;
             return data;
+        }
+    }
+    
+    private static class Node<E> {
+        E data;
+        Node<E> next;
+        Node<E> prev;
+
+        public Node(E data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
         }
     }
 }

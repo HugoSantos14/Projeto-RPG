@@ -17,20 +17,13 @@ public class Stack<E> implements Iterable<E> {
         this.capacity = capacity;
     }
 
-    public Node<E> getHead() {
-        return head;
-    }
-
-    public void setHead(Node<E> head) {
-        this.head = head;
+    public E peek() {
+        if (isEmpty()) throw new NoSuchElementException("Pilha vazia");
+        return head.data;
     }
 
     public int size() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public int getCapacity() {
@@ -42,7 +35,7 @@ public class Stack<E> implements Iterable<E> {
     }
 
     public boolean isFull() {
-        return size == capacity;
+        return size >= capacity;
     }
 
     @Override
@@ -55,7 +48,7 @@ public class Stack<E> implements Iterable<E> {
         Stack<E> temp = new Stack<>(capacity);
         int count = 1;
         while (!isEmpty()) {
-            result.append(count++).append(" - ").append(head.getData()).append("\n");
+            result.append(count++).append(" - ").append(head.data).append("\n");
             temp.push(pop());
         }
 
@@ -68,32 +61,25 @@ public class Stack<E> implements Iterable<E> {
 
     public void push(E data) {
         if (isFull()) {
-            throw new IndexOutOfBoundsException("Pilha cheia");
+            throw new IllegalStateException("Pilha cheia");
         }
 
         final Node<E> newNode = new Node<>(data);
-        newNode.setNext(head);
+        newNode.next = head;
         head = newNode;
         size++;
     }
 
     public E pop() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Pilha vazia");
+            throw new NoSuchElementException("Pilha vazia");
         }
 
         final Node<E> removedNode = head;
-        head = head.getNext();
-        removedNode.setNext(null);
+        head = head.next;
+        removedNode.next = null;
         size--;
-        return removedNode.getData();
-    }
-
-    public E peek() {
-        if (isEmpty()) {
-            return null;
-        }
-        return head.getData();
+        return removedNode.data;
     }
 
     @Override
@@ -103,8 +89,6 @@ public class Stack<E> implements Iterable<E> {
 
     private class StackIterator implements Iterator<E> {
         private Node<E> current;
-        private final Stack<E> temp = new Stack<>(capacity);
-
 
         @Override
         public boolean hasNext() {
@@ -114,11 +98,25 @@ public class Stack<E> implements Iterable<E> {
         @Override
         public E next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("Pilha vazia");
             }
-            final E data = current.getData();
-            current = current.getNext();
+            final E data = current.data;
+            current = current.next;
             return data;
+        }
+    }
+    
+    private static class Node<E> {
+        E data;
+        Node<E> next;
+
+        public Node(E data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
         }
     }
 }

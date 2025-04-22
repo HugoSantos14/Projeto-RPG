@@ -18,28 +18,18 @@ public class Queue<E> implements Iterable<E> {
         this.capacity = capacity;
     }
 
-    public Node<E> getHead() {
-        return head;
+    public E getFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Fila vazia");
+        return head.data;
     }
 
-    public void setHead(Node<E> head) {
-        this.head = head;
-    }
-
-    public Node<E> getTail() {
-        return tail;
-    }
-
-    public void setTail(Node<E> tail) {
-        this.tail = tail;
+    public E getLast() {
+        if (isEmpty()) throw new NoSuchElementException("Fila vazia");
+        return tail.data;
     }
 
     public int size() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public int getCapacity() {
@@ -51,7 +41,7 @@ public class Queue<E> implements Iterable<E> {
     }
 
     public boolean isFull() {
-        return size == capacity;
+        return size >= capacity;
     }
 
     @Override
@@ -64,11 +54,11 @@ public class Queue<E> implements Iterable<E> {
         Node<E> current = head;
         int count = 1;
         while (current != null) {
-            result.append(count++).append(" - ").append(current.getData());
-            if (head.getNext() != null) {
+            result.append(count++).append(" - ").append(current.data);
+            if (head.next != null) {
                 result.append("\n");
             }
-            current = current.getNext();
+            current = current.next;
         }
 
         return result.toString();
@@ -76,15 +66,15 @@ public class Queue<E> implements Iterable<E> {
 
     public void enqueue(E data) {
         if (isFull()) {
-            throw new IndexOutOfBoundsException("Fila cheia");
+            throw new IllegalStateException("Fila cheia");
         }
 
         final Node<E> newNode = new Node<>(data);
         if (isEmpty()) {
             head = newNode;
         } else {
-            tail.setNext(newNode);
-            newNode.setPrev(tail);
+            tail.next = newNode;
+            newNode.prev = tail;
         }
         tail = newNode;
         size++;
@@ -92,47 +82,41 @@ public class Queue<E> implements Iterable<E> {
 
     public E dequeue() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Fila vazia");
+            throw new NoSuchElementException("Fila vazia");
         }
 
-        final E removedData = head.getData();
-        head = head.getNext();
+        final Node<E> removedNode = head;
+        head = head.next;
+        removedNode.next = null;
         size--;
 
         if (isEmpty()) {
             tail = null;
         }
 
-        return removedData;
-    }
-
-    public E peek() {
-        if (isEmpty()) {
-            return null;
-        }
-        return head.getData();
+        return removedNode.data;
     }
 
     public E get(int index) {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException("Fila vazia");
+            throw new NoSuchElementException("Fila vazia");
         } else if (index > size - 1 || index < 0) {
             throw new IndexOutOfBoundsException("Índice " + index + " não encontrado");
         } else if (index == 0) {
-            return head.getData();
+            return head.data;
         } else if (index == size - 1) {
-            return tail.getData();
+            return tail.data;
         }
 
         Node<E> current = head;
         int count = 0;
         while (current != null && count < index) {
-            current = current.getNext();
+            current = current.next;
             count++;
         }
 
         assert current != null;
-        return current.getData();
+        return current.data;
     }
 
     @Override
@@ -150,11 +134,26 @@ public class Queue<E> implements Iterable<E> {
 
         public E next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("Fila vazia");
             }
-            final E data = current.getData();
-            current = current.getNext();
+            final E data = current.data;
+            current = current.next;
             return data;
+        }
+    }
+    
+    private static class Node<E> {
+        E data;
+        Node<E> next;
+        Node<E> prev;
+
+        public Node(E data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
         }
     }
 }
